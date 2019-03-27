@@ -102,6 +102,8 @@ public class UserDetails {
         this.userActivity = userActivity;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
     public Long getUserId() {
         return userId;
     }

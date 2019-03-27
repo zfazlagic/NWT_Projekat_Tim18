@@ -1,6 +1,8 @@
 package com.service.users;
 
 import com.service.entities.User;
+import com.service.entities.UserDetails;
+import com.service.repositories.UserDetailRepository;
 import com.service.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,7 @@ public class UsersApplication {
             repository.save(new User("Client", "dmusinovic", "sifra"));
             repository.save(new User("Client", "nnikic", "sifra"));
             repository.save(new User("Client", "ttestic", "sifra"));
+
 
             // fetch all customers
             log.info("Users found with getAllUsers():");

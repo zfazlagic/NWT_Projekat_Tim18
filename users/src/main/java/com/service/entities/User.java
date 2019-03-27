@@ -29,6 +29,7 @@ public class User {
 
     // Get and Set Methods
 
+    @OneToOne(mappedBy = "userId")
     public Long getId() {
         return id;
     }
