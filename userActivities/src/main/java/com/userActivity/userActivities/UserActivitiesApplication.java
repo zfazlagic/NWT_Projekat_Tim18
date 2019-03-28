@@ -1,6 +1,6 @@
 package com.userActivity.userActivities;
 
-import models.activity;
+import models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import repositories.activityRepository;
+import repositories.*;
 
 
 
@@ -25,12 +25,12 @@ public class UserActivitiesApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(activityRepository repository) {
+	public CommandLineRunner demo(activityRepository repository, activityDetailsRepository detailsRepository) {
 		return (args) -> {
 			// save a couple of customers
 			repository.save(new activity(1, 2, 1, 0));
 			repository.save(new activity(5, 4, 1, 0));
-
+			repository.save(new activity(5, 4, 1, 0));
 
 			// fetch all customers
 			log.info("User Activities found with findAll():");

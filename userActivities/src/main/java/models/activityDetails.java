@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "activityDetails")
 public class activityDetails {
 
     public Integer getId() {
@@ -34,6 +35,8 @@ public class activityDetails {
         this.location = location;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "activityId")
     public Integer getActivityId() {
         return activityId;
     }
@@ -45,9 +48,17 @@ public class activityDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column(name = "beginDate")
     private Date beginDate;
+
+    @Column(name = "endDate")
     private Date endDate;
+
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "activityId")
     private Integer activityId;
 
   protected activityDetails() {}

@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "activity")
 public class activity {
+
+    @OneToOne(mappedBy = "activityId")
     public Integer getId() {
         return id;
     }
