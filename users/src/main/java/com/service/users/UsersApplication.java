@@ -1,8 +1,6 @@
 package com.service.users;
 
 import com.service.entities.User;
-import com.service.entities.UserDetails;
-import com.service.repositories.UserDetailRepository;
 import com.service.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@SpringBootApplication
-//@ComponentScan({"com.delivery.request"})
+@SpringBootApplication(scanBasePackages = {"com.service"})
 @EntityScan("com.service.entities")
 @EnableJpaRepositories("com.service.repositories")
 public class UsersApplication {
@@ -26,15 +23,16 @@ public class UsersApplication {
         SpringApplication.run(UsersApplication.class, args);
     }
 
+
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
             // save a couple of customers
-            repository.save(new User("Admin", "dcosic", "sifra"));
-            repository.save(new User("Client", "zfazlagic", "sifra"));
-            repository.save(new User("Client", "dmusinovic", "sifra"));
-            repository.save(new User("Client", "nnikic", "sifra"));
-            repository.save(new User("Client", "ttestic", "sifra"));
+            repository.save(new User("Admin", "dcosic", "sifra123"));
+            repository.save(new User("Client", "zfazlagic", "sifra123"));
+            repository.save(new User("Client", "dmusinovic", "sifra123"));
+            repository.save(new User("Client", "nnikic", "sifra123"));
+            //repository.save(new User("Client", "ttestic", "sifra"));
 
 
             // fetch all customers
