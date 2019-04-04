@@ -1,6 +1,6 @@
 package models;
-
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -50,15 +50,20 @@ public class activityDetails {
     private Integer id;
 
     @Column(name = "beginDate")
+    @NotEmpty(message = "Begin date can't be null.")
     private Date beginDate;
 
     @Column(name = "endDate")
+//    @NotEmpty(message = "End date can't be null.")
+
     private Date endDate;
 
     @Column(name = "location")
+//    @NotEmpty(message = "Location can't be null.")
     private String location;
 
     @Column(name = "activityId")
+//    @NotEmpty(message = "Activity_id can't be null.")
     private Integer activityId;
 
   protected activityDetails() {}

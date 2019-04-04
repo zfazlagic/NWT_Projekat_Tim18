@@ -1,6 +1,5 @@
 package models;
 
-
 import javax.persistence.*;
 
 
@@ -8,8 +7,8 @@ import javax.persistence.*;
 @Table(name = "activity")
 public class activity {
 
-    @OneToOne(mappedBy = "activityId")
-    public Integer getId() {
+    @OneToOne(mappedBy = "activityDetails")
+    public Long getId() {
         return id;
     }
 
@@ -31,12 +30,14 @@ public class activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name = "userID")
+//    @NotEmpty(message = "UserID can't be null.")
     private Integer userId;
 
     @Column(name = "carID")
+//    @NotEmpty(message = "CarID can't be null.")
     private Integer carId;
 
     public Integer getIsRental() {
@@ -55,8 +56,10 @@ public class activity {
         this.isReservation = isReservation;
     }
     @Column(name = "isRental")
+//    @NotEmpty(message = "isRental can't be null.")
     private Integer isRental;
     @Column(name = "isReservation")
+//    @NotEmpty(message = "isReservation can't be null.")
     private Integer isReservation;
 
     protected activity() {}

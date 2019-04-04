@@ -1,13 +1,12 @@
 package repositories;
 
-import org.springframework.data.repository.CrudRepository;
-
-import models.activityDetails;
+import models.activity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface activityDetailsRepository extends CrudRepository<activityDetails, Integer> {
+public interface activityDetailsRepository extends JpaRepository<activity, Long> {
 
 }
 

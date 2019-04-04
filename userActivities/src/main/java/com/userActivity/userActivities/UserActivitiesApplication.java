@@ -20,17 +20,19 @@ public class UserActivitiesApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(UserActivitiesApplication.class);
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(UserActivitiesApplication.class, args);
+
 	}
 
 	@Bean
 	public CommandLineRunner demo(activityRepository repository, activityDetailsRepository detailsRepository) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new activity(1, 2, 1, 0));
-			repository.save(new activity(5, 4, 1, 0));
-			repository.save(new activity(5, 4, 1, 0));
+			repository.save(new activity(151, 22, 1, 0));
+			repository.save(new activity(555, 45, 1, 0));
+			repository.save(new activity(456, 54, 1, 0));
 
 			// fetch all customers
 			log.info("User Activities found with findAll():");
