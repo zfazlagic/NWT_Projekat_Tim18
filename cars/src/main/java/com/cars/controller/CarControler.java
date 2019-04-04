@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.cars.model.Cars;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -33,25 +32,35 @@ public class CarControler {
 
     // get car by id
 
-       @GetMapping("/user/{id}")
-       public Cars getCarById (@PathVariable long id) {
-
-           return carsRepository.findById(id);
-
-       }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/carDetail{carId}")
-    public ResponseEntity<List<Cars>> getCarDetails(long carId) {
-        CarDetails carDetail = this.carsDetailsInterface.findCarDetailsById(carId);
-       /* if (countries.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }*/
-        return new ResponseEntity(carDetail, HttpStatus.OK);
+       @GetMapping("/car/{id}")
+       public Cars getCarById (@PathVariable int id) {
+        return carsRepository.findById(id);
     }
 
+        // get car detail
+
+    @GetMapping("/detail/{id}")
+    public CarDetails getDetailById (@PathVariable int id) {
+        return carsDetailsInterface.findById(id);
+    }
+
+
+        @PostMapping("/delete/{id}")
+        public Cars deteteCar(@PathVariable int id) {
+
+        Cars car=this.carsRepository.findById(id);
+        car.setDeletable(true);
+       return carsRepository.save(car);
+    }
+    // add new car
     @PostMapping("/addCar")
     Cars addNewCar(@RequestBody Cars newCar) {
         return carsRepository.save(newCar);
+    }
+
+    // add detail about car
+    @PostMapping("/addDetail")
+    CarDetails addDetail(@RequestBody CarDetails details) {
+        return carsDetailsInterface.save(details);
     }
 }

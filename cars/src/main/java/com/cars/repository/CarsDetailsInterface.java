@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.CrudRepository;
 
 @Repository
-public interface CarsDetailsInterface extends CrudRepository<CarDetails, Long>{
-    CarDetails findCarDetailsById(long carId);
+public interface CarsDetailsInterface extends CrudRepository<CarDetails, Integer>{
+    CarDetails findById(int carId);
 }

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
-public interface CarsRepository extends CrudRepository <Cars, Long> {
+public interface CarsRepository extends CrudRepository <Cars, Integer> {
     List<Cars> findAll();
-    Cars findById(long id);
+    Cars findById(int id);
 }
