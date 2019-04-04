@@ -7,5 +7,5 @@ import java.util.List;
 @Repository
 public interface CarsRepository extends CrudRepository <Cars, Long> {
     List<Cars> findAll();
-    Cars findUserById(Long id);
+    Cars findById(long id);
 }

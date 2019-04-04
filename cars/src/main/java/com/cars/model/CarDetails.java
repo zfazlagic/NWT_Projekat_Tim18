@@ -1,26 +1,44 @@
 package com.cars.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class CarDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
+    @NotNull(message = "Car name cannot be null")
+    @Size(min = 1, max = 200, message = "Car name must be between 5 and 200 characters")
     private String carName;
+
+    @NotNull(message = "Car type cannot be null")
+    @Size(min = 5, max = 200, message = "Car type must be between 5 and 200 characters")
     private String carType;
+
+    @NotNull(message = " Year model cannot be null")
     private int yearModel;
-    private String licence;
+
+    @NotNull(message = "Licence cannot be null")
+    // @Size(min = 5, max = 200, message = "Name must be between 5 and 200 characters")
+    private String police;
+    @NotNull(message = "Number of seats cannot be null")
     private  int numberOfSeats;
+
+    @NotNull(message = "isAvailable field cannot be null")
     private boolean isAvailable;
+
+    @NotNull(message = "Car ID cannot be null")
     private int carId;
 
+    public CarDetails(){}
 
-    public CarDetails(String carName, String carType, int yearModel, String licence, int numberOfSeats, boolean isAvailable, int carId) {
+    public CarDetails(String carName, String carType, int yearModel, String police, int numberOfSeats, boolean isAvailable, int carId) {
         this.carName = carName;
         this.carType = carType;
         this.yearModel = yearModel;
-        this.licence = licence;
+        this.police = police;
         this.numberOfSeats = numberOfSeats;
         this.isAvailable = isAvailable;
         this.carId = carId;
@@ -43,8 +61,8 @@ public class CarDetails {
         this.yearModel = yearModel;
     }
 
-    public void setLicence(String licence) {
-        this.licence = licence;
+    public void setPolice(String police) {
+        this.police = police;
     }
 
     public void setNumberOfSeats(int numberOfSeats) {
@@ -55,6 +73,8 @@ public class CarDetails {
         isAvailable = available;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carId")
     public void setCarId(int carId) {
         this.carId = carId;
     }
@@ -77,8 +97,8 @@ public class CarDetails {
         return yearModel;
     }
 
-    public String getLicence() {
-        return licence;
+    public String getPolice() {
+        return police;
     }
 
     public int getNumberOfSeats() {

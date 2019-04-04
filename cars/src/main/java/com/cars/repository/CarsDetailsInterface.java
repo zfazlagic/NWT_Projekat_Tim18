@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 @Repository
 public interface CarsDetailsInterface extends CrudRepository<CarDetails, Long>{
+    CarDetails findCarDetailsById(long carId);
 }
