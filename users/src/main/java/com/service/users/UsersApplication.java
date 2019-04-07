@@ -23,7 +23,7 @@ public class UsersApplication {
         SpringApplication.run(UsersApplication.class, args);
     }
 
-
+/*
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
@@ -57,5 +57,5 @@ public class UsersApplication {
             // }
             log.info("");
         };
-    }
+    }*/
 }

@@ -38,20 +38,19 @@ public class UserDetails {
     @Column(name = "userActivities")
     private Long userActivity;
 
-    @NotEmpty(message = "Field userId cannot be empty!")
-    @Column(name = "userId")
-    private Long userId;
+    @OneToOne(mappedBy = "userDetails")
+    private User user;
 
-    protected UserDetails() {}
+    protected UserDetails() {
+    }
 
-    public UserDetails(String firstname, String lastname, String email, Date createdAt, int verified, Long userActivity, Long userId) {
+    public UserDetails(String firstname, String lastname, String email, Date createdAt, int verified, Long userActivity) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.createdAt = createdAt;
         this.verified = verified;
         this.userActivity = userActivity;
-        this.userId = userId;
     }
 
     // Get and Set Methods
@@ -112,13 +111,12 @@ public class UserDetails {
         this.userActivity = userActivity;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    public Long getUserId() {
-        return userId;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

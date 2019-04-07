@@ -25,18 +25,25 @@ public class User {
     @Size(min = 7, max = 15, message = "Password must have more than 7  and less than 15 characters!")
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user")
+    private UserDetails userDetails;
+
     protected User() {}
 
-    public User(String role, String username, String password)
+
+    public User(String role, String username, String password, UserDetails userDetails)
     {
         this.role = role;
         this.username = username;
         this.password = password;
+        this.userDetails = userDetails;
+        this.userDetails.setUser(this);
     }
 
     // Get and Set Methods
 
-    @OneToOne(mappedBy = "UserDetails")
+
     public Long getId() {
         return id;
     }
@@ -67,6 +74,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override

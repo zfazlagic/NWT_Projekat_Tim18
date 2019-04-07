@@ -3,6 +3,8 @@ package com.service.controllers;
 
 import com.service.customExceptions.UserNotFoundException;
 import com.service.entities.User;
+import com.service.entities.UserDetails;
+import com.service.repositories.UserDetailRepository;
 import com.service.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,8 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    UserController(UserRepository repository) {
+
+    UserController(UserRepository repository, UserDetailRepository detailsRepository) {
         this.userRepository = repository;
     }
 
@@ -25,6 +28,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     User addNewUser(@RequestBody User newUser) {
+
         return userRepository.save(newUser);
     }
 
