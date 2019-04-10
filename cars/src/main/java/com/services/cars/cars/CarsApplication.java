@@ -11,11 +11,13 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(scanBasePackages = {"com.services"})
 @EntityScan("com.cars.model")
 @EnableJpaRepositories("com.cars.repository")
 @ComponentScan(basePackageClasses= CarControler.class)
+@EnableDiscoveryClient
 public class CarsApplication {
 
 	public static void main(String[] args) {
