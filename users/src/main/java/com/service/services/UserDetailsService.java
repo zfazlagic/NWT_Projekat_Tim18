@@ -23,8 +23,8 @@ public class UserDetailsService {
                          String email, Long userActivities, Integer verified, Date createdAt) {
 
         UserDetails userDetails = new UserDetails(firstName,lastName,email,createdAt,verified,userActivities);
-        User user = new User(role, username, password, userDetails);
-        userRepository.save(user);
+        //User user = new User(role, username, password, userDetails);
+        //userRepository.save(user);
         userDetailsRepository.save(userDetails);
     }
 

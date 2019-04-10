@@ -32,13 +32,12 @@ public class User {
     protected User() {}
 
 
-    public User(String role, String username, String password, UserDetails userDetails)
+    public User(String role, String username, String password)
     {
         this.role = role;
         this.username = username;
         this.password = password;
-        this.userDetails = userDetails;
-        this.userDetails.setUser(this);
+
     }
 
     // Get and Set Methods

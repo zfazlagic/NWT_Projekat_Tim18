@@ -1,5 +1,6 @@
 package com.service.users;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.entities.User;
 import com.service.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -10,11 +11,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import com.google.common.collect.ImmutableList;
+import org.springframework.http.MediaType;
+
+import java.util.List;
 
 
 @SpringBootApplication(scanBasePackages = {"com.service"})
 @EntityScan("com.service.entities")
 @EnableJpaRepositories("com.service.repositories")
+@EnableDiscoveryClient
 public class UsersApplication {
 
     private static final Logger log = LoggerFactory.getLogger(UsersApplication.class);
@@ -23,7 +34,7 @@ public class UsersApplication {
         SpringApplication.run(UsersApplication.class, args);
     }
 
-/*
+
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
@@ -57,5 +68,19 @@ public class UsersApplication {
             // }
             log.info("");
         };
-    }*/
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
+        for (HttpMessageConverter<?> converter : converters) {
+            if (converter instanceof MappingJackson2HttpMessageConverter) {
+                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
+                jsonConverter.setObjectMapper(new ObjectMapper());
+                jsonConverter.setSupportedMediaTypes(ImmutableList.of(new MediaType("application", "json", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET), new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET)));
+            }
+        }
+        return restTemplate;
+    }
 }
