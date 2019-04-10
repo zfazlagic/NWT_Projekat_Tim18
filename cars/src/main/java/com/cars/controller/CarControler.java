@@ -24,14 +24,13 @@ public class CarControler {
     }
 
     //get all cars
-    @GetMapping("/all")
-    public Iterable<Cars> listAllCars() {
-       return carsRepository.findAll();
-
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    ResponseEntity<List<Cars>> listAllCars() {
+        List<Cars> cars = (List<Cars>) this.carsRepository.findAll();
+        return new ResponseEntity<List<Cars>>(cars, HttpStatus.OK);
     }
 
     // get car by id
-
        @GetMapping("/car/{id}")
        public Cars getCarById (@PathVariable int id) {
         return carsRepository.findById(id);

@@ -22,12 +22,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
-
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com.services"})
 @EntityScan("com.cars.model")
 @EnableJpaRepositories("com.cars.repository")
 @ComponentScan(basePackageClasses= CarControler.class)
-@EnableDiscoveryClient
 public class CarsApplication {
 
 	public static void main(String[] args) {
