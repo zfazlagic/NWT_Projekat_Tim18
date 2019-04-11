@@ -1,10 +1,12 @@
-package com.userActivity.userActivities;
-import models.activity;
+package controllers;
+
 import exceptions.activityNotFound;
-import repositories.activityRepository;
+import models.activity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import repositories.activityRepository;
 
 @RestController
 public class userActivityController {
@@ -19,8 +21,10 @@ public class userActivityController {
         return activityRepo.findAll();
     }
 
-    @PostMapping("/addActivity")
-    activity addNewActivity(@RequestBody activity newActivity) {
+
+    @RequestMapping(value = "/addActivity", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody activity addNewActivity(activity newActivity) {
+
         return activityRepo.save(newActivity);
     }
 

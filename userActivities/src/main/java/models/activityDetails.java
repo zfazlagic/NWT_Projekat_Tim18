@@ -1,7 +1,6 @@
 package models;
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "activityDetails")
@@ -11,19 +10,19 @@ public class activityDetails {
         return id;
     }
 
-    public Date getBeginDate() {
+    public String getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -35,8 +34,7 @@ public class activityDetails {
         this.location = location;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "activityId")
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -49,26 +47,26 @@ public class activityDetails {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "beginDate")
+    @Column(name = "beginDate", nullable = false)
     @NotEmpty(message = "Begin date can't be null.")
-    private Date beginDate;
+    private String beginDate;
 
-    @Column(name = "endDate")
+    @Column(name = "endDate", nullable = false)
 //    @NotEmpty(message = "End date can't be null.")
 
-    private Date endDate;
+    private String endDate;
 
-    @Column(name = "location")
+    @Column(name = "location", nullable = false)
 //    @NotEmpty(message = "Location can't be null.")
     private String location;
 
-    @Column(name = "activityId")
+    @Column(name = "activityId", nullable = false)
 //    @NotEmpty(message = "Activity_id can't be null.")
     private Integer activityId;
 
   protected activityDetails() {}
 
-  public activityDetails(Date beginDate, Date endDate, String location, Integer activityId){
+  public activityDetails(String beginDate, String endDate, String location, Integer activityId){
       this.beginDate=beginDate;
       this.endDate=endDate;
       this.location=location;
@@ -77,7 +75,7 @@ public class activityDetails {
 
   @Override
     public String toString (){
-      return String.format("Activity Details[id=%d, beginDate='%1$td.%1$tm.%1$ty', endDate='%1$td.%1$tm.%1$ty', location='%s', activityId='%d']",
+      return String.format("Activity Details[id=%d, beginDate='%s', endDate='%1s', location='%s', activityId='%d']",
               id, beginDate, endDate, location, activityId);
   }
 }

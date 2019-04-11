@@ -1,13 +1,13 @@
 package models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name = "activity")
 public class activity {
 
-    @OneToOne(mappedBy = "activityDetails")
     public Long getId() {
         return id;
     }
@@ -33,10 +33,11 @@ public class activity {
     private Long id;
 
     @Column(name = "userID")
-//    @NotEmpty(message = "UserID can't be null.")
+
+   @NotNull(message = "UserID can't be null.")
     private Integer userId;
 
-    @Column(name = "carID")
+    @Column(name = "carID", nullable = false)
 //    @NotEmpty(message = "CarID can't be null.")
     private Integer carId;
 
@@ -55,10 +56,10 @@ public class activity {
     public void setIsReservation(Integer isReservation) {
         this.isReservation = isReservation;
     }
-    @Column(name = "isRental")
+    @Column(name = "isRental", nullable = false)
 //    @NotEmpty(message = "isRental can't be null.")
     private Integer isRental;
-    @Column(name = "isReservation")
+    @Column(name = "isReservation", nullable = false)
 //    @NotEmpty(message = "isReservation can't be null.")
     private Integer isReservation;
 
