@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.cars.model.Cars;
+
+import javax.persistence.PostUpdate;
 import java.util.List;
 
 
@@ -14,13 +16,13 @@ import java.util.List;
 public class CarControler {
 
     private final CarsRepository carsRepository;
-    private final CarsDetailsInterface carsDetailsInterface;
 
 
 
-    public CarControler(CarsRepository carsRepository, CarsDetailsInterface carsDetailsInterface) {
+
+    public CarControler(CarsRepository carsRepository) {
         this.carsRepository = carsRepository;
-        this.carsDetailsInterface=carsDetailsInterface;
+
     }
 
     //get all cars
@@ -36,15 +38,7 @@ public class CarControler {
         return carsRepository.findById(id);
     }
 
-        // get car detail
-
-    @GetMapping("/detail/{id}")
-    public CarDetails getDetailById (@PathVariable int id) {
-        return carsDetailsInterface.findById(id);
-    }
-
-
-        @PostMapping("/delete/{id}")
+        @PutMapping("/delete/{id}")
         public Cars deteteCar(@PathVariable int id) {
 
         Cars car=this.carsRepository.findById(id);
@@ -57,9 +51,11 @@ public class CarControler {
         return carsRepository.save(newCar);
     }
 
-    // add detail about car
-    @PostMapping("/addDetail")
-    CarDetails addDetail(@RequestBody CarDetails details) {
-        return carsDetailsInterface.save(details);
+
+    @DeleteMapping("/removeCar/{id}")
+    ResponseEntity<String> deleteCarById(@PathVariable int id) {
+        carsRepository.deleteById(id);
+        return new ResponseEntity<>("Car with id: " + id + " was deleted!", HttpStatus.OK);
     }
+
 }
