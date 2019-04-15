@@ -35,7 +35,7 @@ public class CarDetailsContoller {
     }
     @DeleteMapping("/removeCarDetails/{id}")
     ResponseEntity<String> deleteCarDetailsById(@PathVariable int id) {
-        carsDetailsInterface.deleteById(id);
+        //carsDetailsInterface.deleteById(id);
         return new ResponseEntity<>("Car details with id: " + id + " was deleted!", HttpStatus.OK);
     }
 }

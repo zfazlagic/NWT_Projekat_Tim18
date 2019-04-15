@@ -1,6 +1,7 @@
 package com.services.cars.cars;
 
 import com.cars.controller.CarControler;
+import com.cars.controller.UserController;
 import com.cars.model.Cars;
 import com.cars.repository.CarsRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EntityScan("com.cars.model")
 @EnableJpaRepositories("com.cars.repository")
 @ComponentScan(basePackageClasses= CarControler.class)
+@ComponentScan(basePackageClasses= UserController.class)
 public class CarsApplication {
 
 	public static void main(String[] args) {

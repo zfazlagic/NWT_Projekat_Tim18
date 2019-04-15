@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.service.services.UserEventHendler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -32,10 +33,28 @@ public class UserController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    UserEventHendler userEventHendler;
+
 
     UserController(UserRepository repository) {
         this.userRepository = repository;
     }
+
+    //Rabbitmq
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user, UriComponentsBuilder ucBuilder) {
+        // ako nema usera
+
+        userRepository.save(user);
+        userEventHendler.handleUserSave(user);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+
 
     // Get all users from the database
     @RequestMapping(method = RequestMethod.GET, value = "/users")

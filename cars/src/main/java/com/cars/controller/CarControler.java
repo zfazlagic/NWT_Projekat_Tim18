@@ -54,7 +54,7 @@ public class CarControler {
 
     @DeleteMapping("/removeCar/{id}")
     ResponseEntity<String> deleteCarById(@PathVariable int id) {
-        carsRepository.deleteById(id);
+     //   carsRepository.deleteById(id);
         return new ResponseEntity<>("Car with id: " + id + " was deleted!", HttpStatus.OK);
     }
 

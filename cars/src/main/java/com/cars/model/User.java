@@ -2,7 +2,7 @@ package com.cars.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
+@Entity
 public class User {
 
     @Id
