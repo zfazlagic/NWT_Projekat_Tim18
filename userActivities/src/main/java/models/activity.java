@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -38,7 +39,7 @@ public class activity {
     private Integer userId;
 
     @Column(name = "carID", nullable = false)
-//    @NotEmpty(message = "CarID can't be null.")
+    @NotEmpty(message = "CarID can't be null.")
     private Integer carId;
 
     public Integer getIsRental() {
@@ -57,10 +58,10 @@ public class activity {
         this.isReservation = isReservation;
     }
     @Column(name = "isRental", nullable = false)
-//    @NotEmpty(message = "isRental can't be null.")
+    @NotEmpty(message = "isRental can't be null.")
     private Integer isRental;
     @Column(name = "isReservation", nullable = false)
-//    @NotEmpty(message = "isReservation can't be null.")
+    @NotEmpty(message = "isReservation can't be null.")
     private Integer isReservation;
 
     protected activity() {}
