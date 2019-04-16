@@ -104,7 +104,7 @@ public class UserController {
         Optional<User> existingUser = userRepository.findById(id);
 
         if (!existingUser.isPresent()) {
-            return new ResponseEntity("Unable to upate. Country with id " + id + " not found.",
+            return new ResponseEntity("Unable to update. Country with id " + id + " not found.",
                     HttpStatus.NOT_FOUND);
         }
 

@@ -1,13 +1,18 @@
-package models;
+package com.service.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+public class UserActivity {
 
 
-@Entity
-@Table(name = "activity")
-public class activity {
+    private Long id;
+
+    private Integer userId;
+
+    private Integer carId;
+
+    private Integer isRental;
+
+    private Integer isReservation;
+
 
     public Long getId() {
         return id;
@@ -29,18 +34,6 @@ public class activity {
         this.carId = carId;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "userID")
-
-   @NotNull(message = "UserID can't be null.")
-    private Integer userId;
-
-    @Column(name = "carID", nullable = false)
-    @NotEmpty(message = "CarID can't be null.")
-    private Integer carId;
 
     public Integer getIsRental() {
         return isRental;
@@ -57,16 +50,12 @@ public class activity {
     public void setIsReservation(Integer isReservation) {
         this.isReservation = isReservation;
     }
-    @Column(name = "isRental", nullable = false)
-    @NotEmpty(message = "isRental can't be null.")
-    private Integer isRental;
-    @Column(name = "isReservation", nullable = false)
-    @NotEmpty(message = "isReservation can't be null.")
-    private Integer isReservation;
 
-    protected activity() {}
 
-    public activity(Integer userId, Integer carId, Integer isRental, Integer isReservation) {
+    protected UserActivity() {
+    }
+
+    public UserActivity(Integer userId, Integer carId, Integer isRental, Integer isReservation) {
         this.userId = userId;
         this.carId = carId;
         this.isRental = isRental;
@@ -81,3 +70,4 @@ public class activity {
     }
 
 }
+

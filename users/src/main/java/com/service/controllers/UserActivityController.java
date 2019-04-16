@@ -2,8 +2,10 @@ package com.service.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import com.service.entities.UserActivity;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -43,6 +45,39 @@ public class UserActivityController {
     @Autowired
     private EurekaClient eurekaClient;
 
-    @Value("${service.userActivityService.serviceId}")
-    private String identityServiceServiceId;
+    @Value("${service.usersService.serviceId}")
+    private String userActivityServiceId;
+
+    @RequestMapping("/useractivity/{myself}")
+    public UserActivity findme(@PathVariable Long myself)
+    {
+        Application application = eurekaClient.getApplication(userActivityServiceId);
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        System.out.println(instanceInfo +"INSTANCE INFOOO");
+        String url = "http://USERACTIVITY/activities/"+myself;
+        //String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "activities/" + myself;
+        System.out.println("URL" + url);
+        //ObjectMapper mapper = new ObjectMapper();
+        //mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        UserActivity emp = restTemplate.getForObject(url, UserActivity.class);
+        System.out.println(restTemplate.getForObject(url, UserActivity.class));
+        //System.out.println("RESPONSE " + emp);
+        return emp;
+
+    }
+
+    @RequestMapping("/useractivity/all")
+    public Collection < UserActivity > findPeers() {
+        Application application = eurekaClient.getApplication(userActivityServiceId);
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        String url = "http://USERACTIVITY/activities/";
+        System.out.println("URL" + url);
+        Collection < UserActivity > list = restTemplate.getForObject(url, Collection.class);
+        System.out.println("RESPONSE " + list);
+        return list;
+    }
+
+
+
+
 }
