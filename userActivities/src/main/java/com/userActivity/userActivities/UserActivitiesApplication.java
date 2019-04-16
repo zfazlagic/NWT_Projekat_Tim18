@@ -2,6 +2,7 @@ package com.userActivity.userActivities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
+import controllers.activityDetailsController;
 import controllers.userActivityController;
 import models.*;
 import org.slf4j.Logger;
@@ -27,10 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import repositories.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 @ComponentScan(basePackageClasses= userActivityController.class)
+@ComponentScan(basePackageClasses= activityDetailsController.class)
 @EnableDiscoveryClient
 @EntityScan("models")
 @ComponentScan("services")
@@ -47,24 +53,28 @@ public class UserActivitiesApplication {
     }
 
 
-    @Bean
-    public CommandLineRunner demo(activityRepository repository) {
-        return (args) -> {
-            // save a couple of customers
-            repository.save(new activity(151, 22, 1, 0));
-            repository.save(new activity(555, 45, 1, 0));
-            repository.save(new activity(456, 54, 1, 0));
-
-            // fetch all customers
-            log.info("User Activities found with findAll():");
-            log.info("-------------------------------");
-            for (activity ac : repository.findAll()) {
-                log.info(ac.toString());
-            }
-            log.info("end");
-
-        };
-    }
+//    @Bean
+//    public CommandLineRunner demo(activityRepository repository, activityDetailsRepository detailRepo) {
+//        return (args) -> {
+//            // save a couple of customers
+//            repository.save(new activity(151, 22, 1, 0));
+//            repository.save(new activity(555, 45, 1, 0));
+//            repository.save(new activity(456, 54, 1, 0));
+//
+//            Date now = new Date();
+//            detailRepo.save(new activityDetails(now, now, "Sarajevo", 1));
+//            detailRepo.save(new activityDetails(now, now, "Sarajevo", 2));
+//            detailRepo.save(new activityDetails(now, now, "Sarajevo", 3));
+//            // fetch all customers
+//            log.info("User Activities found with findAll():");
+//            log.info("-------------------------------");
+//            for (activity ac : repository.findAll()) {
+//                log.info(ac.toString());
+//            }
+//            log.info("end");
+//
+//        };
+//    }
 
 //
 //    @Bean

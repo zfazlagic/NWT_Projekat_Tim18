@@ -1,8 +1,7 @@
 package models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -30,16 +29,16 @@ public class activity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userID")
-
-//   @NotNull(message = "UserID can't be null.")
+    @Column(name = "userID", nullable = false)
+     @NotNull(message = "UserID can't be null.")
     private Integer userId;
 
     @Column(name = "carID", nullable = false)
-//    @NotEmpty(message = "CarID can't be null.")
+    @NotNull(message = "Car name cannot be null")
+
     private Integer carId;
 
     public Integer getIsRental() {
@@ -57,11 +56,15 @@ public class activity {
     public void setIsReservation(Integer isReservation) {
         this.isReservation = isReservation;
     }
-    @Column(name = "isRental", nullable = false)
-//    @NotEmpty(message = "isRental can't be null.")
+
+    @Column(name = "isRental")
+    @Min(value = 0 , message = "isRental can only be 0 or 1.")
+    @Max(value = 1, message = "isRental can only be 0 or 1.")
     private Integer isRental;
-    @Column(name = "isReservation", nullable = false)
-//    @NotEmpty(message = "isReservation can't be null.")
+
+   @Column(name = "isReservation")
+   @Min(value = 0 , message = "isReservation can only be 0 or 1.")
+   @Max(value = 1, message = "isReservation can only be 0 or 1.")
     private Integer isReservation;
 
     protected activity() {}
