@@ -1,4 +1,4 @@
-package com.userActivity.userActivities;
+package controllers;
 
 import exceptions.activityNotFound;
 import models.activity;

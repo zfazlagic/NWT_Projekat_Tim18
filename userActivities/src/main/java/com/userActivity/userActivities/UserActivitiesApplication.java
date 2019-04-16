@@ -1,5 +1,6 @@
 package com.userActivity.userActivities;
 
+import controllers.userActivityController;
 import models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,16 +74,16 @@ public class UserActivitiesApplication {
 //
 //    }
 
-	@RestController
-	public static class ServiceInstanceRestController {
-		@Autowired
-		private DiscoveryClient discoveryClient;
-
-		@RequestMapping("/service-instances/{applicationName}")
-		public List<ServiceInstance> serviceInstancesByApplicationName(
-				@PathVariable String applicationName) {
-			return this.discoveryClient.getInstances(applicationName);
-		}
-	}
+//	@RestController
+//	public static class ServiceInstanceRestController {
+//		@Autowired
+//		private DiscoveryClient discoveryClient;
+//
+//		@RequestMapping("/service-instances/{applicationName}")
+//		public List<ServiceInstance> serviceInstancesByApplicationName(
+//				@PathVariable String applicationName) {
+//			return this.discoveryClient.getInstances(applicationName);
+//		}
+//	}
 }
 
