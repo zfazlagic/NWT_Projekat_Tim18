@@ -2,8 +2,10 @@ package com.service.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import com.service.entities.UserActivity;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -44,5 +46,32 @@ public class UserActivityController {
     private EurekaClient eurekaClient;
 
     @Value("${service.userActivityService.serviceId}")
-    private String identityServiceServiceId;
+    private String userActivityServiceId;
+
+    @RequestMapping("/userActivity/{myself}")
+    public UserActivity findme(@PathVariable Long myself)
+    {
+        Application application = eurekaClient.getApplication(userActivityServiceId);
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "useractivity/find/" + myself;
+        System.out.println("URL" + url);
+        UserActivity emp = restTemplate.getForObject(url, UserActivity.class);
+        System.out.println("RESPONSE " + emp);
+        return emp;
+    }
+
+    @RequestMapping("/useractivity/peers")
+    public Collection < UserActivity > findPeers() {
+        Application application = eurekaClient.getApplication(userActivityServiceId);
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "useractivity/findall";
+        System.out.println("URL" + url);
+        Collection < UserActivity > list = restTemplate.getForObject(url, Collection.class);
+        System.out.println("RESPONSE " + list);
+        return list;
+    }
+
+
+
+
 }

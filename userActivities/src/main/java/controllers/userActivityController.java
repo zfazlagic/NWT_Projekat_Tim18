@@ -2,15 +2,23 @@ package controllers;
 
 import exceptions.activityNotFound;
 import models.activity;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repositories.activityRepository;
+import services.UserActivityService;
 
 @RestController
 public class userActivityController {
+
+    @Autowired
+    UserActivityService userActivityService;
+
     private final activityRepository activityRepo;
+
 
     userActivityController(activityRepository repository) {
         this.activityRepo = repository;
@@ -18,7 +26,7 @@ public class userActivityController {
 
     @GetMapping("/activities")
     public Iterable<activity> getAllActivities() {
-        return activityRepo.findAll();
+        return userActivityService.getAllUserActivities();
     }
 
 
@@ -31,7 +39,7 @@ public class userActivityController {
     @GetMapping("/activities/{id}")
     activity getActivityById(@PathVariable Long id) {
 
-        return activityRepo.findById(id)
+        return userActivityService.getActivityById(id)
                 .orElseThrow(() -> new activityNotFound(id));
     }
 

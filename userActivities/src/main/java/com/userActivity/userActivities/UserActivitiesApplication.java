@@ -27,8 +27,9 @@ import java.util.List;
 @ComponentScan(basePackageClasses= userActivityController.class)
 @EnableDiscoveryClient
 @EntityScan("models")
+@ComponentScan("services")
 @EnableJpaRepositories("repositories")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"java"})
 public class UserActivitiesApplication {
 
     private static final Logger log = LoggerFactory.getLogger(UserActivitiesApplication.class);
@@ -39,7 +40,7 @@ public class UserActivitiesApplication {
 
     }
 
-    //	@Bean
+//    	@Bean
 //	public CommandLineRunner demo(activityRepository repository) {
 //		return (args) -> {
 //			// save a couple of customers
@@ -57,7 +58,7 @@ public class UserActivitiesApplication {
 //
 //		};
 //	}
-//
+
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
