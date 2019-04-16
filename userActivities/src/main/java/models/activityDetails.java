@@ -48,20 +48,20 @@ public class activityDetails {
     private Integer id;
 
     @Column(name = "beginDate", nullable = false)
-    @NotEmpty(message = "Begin date can't be null.")
+//    @NotEmpty(message = "Begin date can't be null.")
     private String beginDate;
 
     @Column(name = "endDate", nullable = false)
-    @NotEmpty(message = "End date can't be null.")
+//    @NotEmpty(message = "End date can't be null.")
 
     private String endDate;
 
     @Column(name = "location", nullable = false)
-    @NotEmpty(message = "Location can't be null.")
+//    @NotEmpty(message = "Location can't be null.")
     private String location;
 
     @Column(name = "activityId", nullable = false)
-    @NotEmpty(message = "Activity_id can't be null.")
+//    @NotEmpty(message = "Activity_id can't be null.")
     private Integer activityId;
 
   protected activityDetails() {}

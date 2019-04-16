@@ -1,4 +1,4 @@
-package controllers;
+package com.userActivity.userActivities;
 
 import exceptions.activityNotFound;
 import models.activity;
@@ -6,9 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import repositories.activityRepository;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
+@RequestMapping("/activity")
 public class userActivityController {
     private final activityRepository activityRepo;
 
@@ -22,11 +27,12 @@ public class userActivityController {
     }
 
 
-    @RequestMapping(value = "/addActivity", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public @ResponseBody activity addNewActivity(activity newActivity) {
 
+    @PostMapping("/addActivity")
+    activity addNewActivity(@RequestBody activity newActivity) {
         return activityRepo.save(newActivity);
     }
+
 
     @GetMapping("/activities/{id}")
     activity getActivityById(@PathVariable Long id) {
