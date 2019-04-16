@@ -13,8 +13,9 @@ Rent a car aplikacija namijenjena je za iznajmljivanje automobila od strane regi
 
 ### Todos
 
- - Create REST
- - Document REST API
+ - Creating sync communication between microservices
+ - Creating async communication between microservices
+ 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
