@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.service.services.UserEventHendler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,15 +28,35 @@ import javax.validation.Valid;
 @RestController
 public class UserController {
 
+    @Autowired
     private final UserRepository userRepository;
 
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    UserEventHendler userEventHendler;
+
 
     UserController(UserRepository repository) {
         this.userRepository = repository;
     }
+
+    //Rabbitmq
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user, UriComponentsBuilder ucBuilder) {
+        // ako nema usera
+        System.out.println("yerina");
+        userRepository.save(user);
+        userEventHendler.handleUserSave(user);
+        System.out.println(user.toString());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+
 
     // Get all users from the database
     @RequestMapping(method = RequestMethod.GET, value = "/users")
@@ -64,13 +85,13 @@ public class UserController {
     public ResponseEntity<?> createLocation(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 
         // Check if username already exists
-        List<User> users = userRepository.findAll();
-        if (!users.isEmpty()) {
+        Iterable<User> users = userRepository.findAll();
+        /*if (!users.()) {
             for (User u : users) {
                 if (u.getUsername() == user.getUsername())
                     return new ResponseEntity("User with this username already exists!", HttpStatus.CONFLICT);
             }
-        }
+        }*/
 
         // Need to check if update to UserDetails TABLE is required...
         return new ResponseEntity<String>(HttpStatus.CREATED);

@@ -3,6 +3,17 @@ package com.service.entities;
 public class UserActivity {
 
 
+    private Long id;
+
+    private Integer userId;
+
+    private Integer carId;
+
+    private Integer isRental;
+
+    private Integer isReservation;
+
+
     public Long getId() {
         return id;
     }
@@ -23,11 +34,6 @@ public class UserActivity {
         this.carId = carId;
     }
 
-    private Long id;
-
-    private Integer userId;
-
-    private Integer carId;
 
     public Integer getIsRental() {
         return isRental;
@@ -45,9 +51,6 @@ public class UserActivity {
         this.isReservation = isReservation;
     }
 
-    private Integer isRental;
-
-    private Integer isReservation;
 
     protected UserActivity() {
     }
