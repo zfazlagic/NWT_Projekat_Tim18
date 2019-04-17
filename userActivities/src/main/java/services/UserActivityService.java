@@ -5,7 +5,6 @@ import org.apache.commons.lang.NullArgumentException;
 import org.springframework.stereotype.Service;
 import repositories.activityRepository;
 
-import javax.validation.constraints.Null;
 import java.util.Collection;
 import java.util.Optional;
 

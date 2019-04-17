@@ -8,7 +8,14 @@ public class exceptionHandler {
     @ResponseBody
     @ExceptionHandler(activityNotFound.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(activityNotFound ex) {
+    String activityNotFoundHandler(activityNotFound ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(activityDetailsNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String activityDetailNotFoundHandler(activityDetailsNotFound ex) {
         return ex.getMessage();
     }
 }

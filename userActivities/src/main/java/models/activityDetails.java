@@ -1,28 +1,32 @@
 package models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "activityDetails")
 public class activityDetails {
 
-    public Integer getId() {
-        return id;
+    public Long getId() {
+        return detailId;
     }
 
-    public String getBeginDate() {
+    public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(String beginDate) {
+    public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -44,29 +48,32 @@ public class activityDetails {
     }
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long detailId;
 
     @Column(name = "beginDate", nullable = false)
-    @NotEmpty(message = "Begin date can't be null.")
-    private String beginDate;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "beginDate can't be null.")
+    private Date beginDate;
 
     @Column(name = "endDate", nullable = false)
-    @NotEmpty(message = "End date can't be null.")
-
-    private String endDate;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "endDate can't be null.")
+    private Date endDate;
 
     @Column(name = "location", nullable = false)
-    @NotEmpty(message = "Location can't be null.")
+    @NotEmpty(message = "Location can't be empty.")
+    @Size(min = 3, max = 15, message = "Location must be between 3 and 15 characters")
+    @Pattern(regexp = "^[a-zA-Z]+[-_]*[a-zA-Z]", message = "Location only can contain letters")
     private String location;
 
-    @Column(name = "activityId", nullable = false)
-    @NotEmpty(message = "Activity_id can't be null.")
+    @Column(name = "activityId", nullable = false, unique=true)
+    @NotNull(message = "Activity_id can't be null.")
     private Integer activityId;
 
   protected activityDetails() {}
 
-  public activityDetails(String beginDate, String endDate, String location, Integer activityId){
+  public activityDetails(Date beginDate, Date endDate, String location, Integer activityId){
       this.beginDate=beginDate;
       this.endDate=endDate;
       this.location=location;
@@ -76,6 +83,6 @@ public class activityDetails {
   @Override
     public String toString (){
       return String.format("Activity Details[id=%d, beginDate='%s', endDate='%1s', location='%s', activityId='%d']",
-              id, beginDate, endDate, location, activityId);
+              detailId, beginDate, endDate, location, activityId);
   }
 }
