@@ -9,10 +9,17 @@ import org.springframework.context.annotation.Configuration;
 @RabbitListener
 public class CarConfig {
 
-    @Bean
+    @Bean(name="userCreated")
     public Queue carQueue() {
         System.out.println(("queue sam"));
         return new Queue("userCreated.queue");
+    }
+
+    @Bean(name="carCreated")
+    public Queue carCreatedQueue() {
+
+        return new Queue("carCreated.queue");
+
     }
 
 }

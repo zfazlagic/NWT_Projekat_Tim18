@@ -1,7 +1,8 @@
-package com.service.services;
+package com.cars.services;
+
+import com.cars.model.Cars;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.service.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Queue;
@@ -14,33 +15,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RepositoryEventHandler
-public class UserEventHendler {
+public class CarEventHandler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private RabbitTemplate rabbitTemplate;
     private Queue candidateQueue;
 
     @Autowired
-    public UserEventHendler(RabbitTemplate rabbitTemplate, @Qualifier("userCreated")Queue candidateQueue) {
+    public CarEventHandler(RabbitTemplate rabbitTemplate,@Qualifier("carCreated")Queue candidateQueue) {
         this.rabbitTemplate = rabbitTemplate;
         this.candidateQueue = candidateQueue;
     }
 
     @HandleAfterCreate
-    public void handleUserSave(User user) {
-        sendMessage(user);
+    public void handleCarSave(Cars car) {
+        sendMessage(car);
     }
 
-    private void sendMessage(User user) {
+    private void sendMessage(Cars car) {
         rabbitTemplate.convertAndSend(
-                candidateQueue.getName(), serializeToJson(user));
+                candidateQueue.getName(), serializeToJson(car));
     }
 
-    private String serializeToJson(User user) {
+    private String serializeToJson(Cars car) {
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = "";
 
         try {
-            jsonInString = mapper.writeValueAsString(user);
+            jsonInString = mapper.writeValueAsString(car);
         } catch (JsonProcessingException e) {
             logger.info(String.valueOf(e));
         }
