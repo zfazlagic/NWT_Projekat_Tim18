@@ -67,7 +67,7 @@ public class activity {
    @Max(value = 1, message = "isReservation can only be 0 or 1.")
     private Integer isReservation;
 
-    protected activity() {}
+    public activity() {}
 
     public activity(Integer userId, Integer carId, Integer isRental, Integer isReservation) {
         this.userId = userId;
