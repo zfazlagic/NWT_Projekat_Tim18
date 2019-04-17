@@ -54,7 +54,7 @@ public class UserActivityController {
         Application application = eurekaClient.getApplication(userActivityServiceId);
         InstanceInfo instanceInfo = application.getInstances().get(0);
         System.out.println(instanceInfo +"INSTANCE INFOOO");
-        String url = "http://USERACTIVITY/activities/"+myself;
+        String url = "http://USERACTIVITY/activity/activities/"+myself;
         //String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "activities/" + myself;
         System.out.println("URL" + url);
         //ObjectMapper mapper = new ObjectMapper();
@@ -70,7 +70,7 @@ public class UserActivityController {
     public Collection < UserActivity > findPeers() {
         Application application = eurekaClient.getApplication(userActivityServiceId);
         InstanceInfo instanceInfo = application.getInstances().get(0);
-        String url = "http://USERACTIVITY/activities/";
+        String url = "http://USERACTIVITY/activity/activities/";
         System.out.println("URL" + url);
         Collection < UserActivity > list = restTemplate.getForObject(url, Collection.class);
         System.out.println("RESPONSE " + list);
