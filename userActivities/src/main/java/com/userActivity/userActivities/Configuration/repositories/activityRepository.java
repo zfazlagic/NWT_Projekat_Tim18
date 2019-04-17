@@ -1,6 +1,6 @@
-package repositories;
+package com.userActivity.userActivities.Configuration.repositories;
 
-import models.activity;
+import com.userActivity.userActivities.Configuration.models.activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository

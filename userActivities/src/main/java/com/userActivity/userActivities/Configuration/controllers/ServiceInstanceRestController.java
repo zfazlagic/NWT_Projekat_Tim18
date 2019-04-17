@@ -1,4 +1,4 @@
-package controllers;
+package com.userActivity.userActivities.Configuration.controllers;
 
 
         import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ package controllers;
         import org.springframework.web.bind.annotation.RestController;
 
         import java.util.List;
-        import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ServiceInstanceRestController {

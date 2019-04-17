@@ -1,4 +1,4 @@
-package exceptions;
+package com.userActivity.userActivities.Configuration.exceptions;
 
 public class activityDetailsNotFound extends RuntimeException {
     public activityDetailsNotFound(Long id) {

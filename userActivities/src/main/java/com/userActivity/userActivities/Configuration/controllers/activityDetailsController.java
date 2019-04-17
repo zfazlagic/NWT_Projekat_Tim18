@@ -1,15 +1,14 @@
-package controllers;
+package com.userActivity.userActivities.Configuration.controllers;
 
-import exceptions.activityDetailsNotFound;
+import com.userActivity.userActivities.Configuration.exceptions.activityDetailsNotFound;
 
-import models.activity;
-import models.activityDetails;
+import com.userActivity.userActivities.Configuration.models.activityDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repositories.activityDetailsRepository;
-import services.ActivityDetailsService;
+import com.userActivity.userActivities.Configuration.repositories.activityDetailsRepository;
+import com.userActivity.userActivities.Configuration.services.ActivityDetailsService;
 
 import javax.validation.Valid;
 import java.util.Optional;

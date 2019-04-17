@@ -1,9 +1,9 @@
-package services;
+package com.userActivity.userActivities.Configuration.services;
 
-import models.activityDetails;
+import com.userActivity.userActivities.Configuration.models.activityDetails;
 import org.apache.commons.lang.NullArgumentException;
 import org.springframework.stereotype.Service;
-import repositories.activityDetailsRepository;
+import com.userActivity.userActivities.Configuration.repositories.activityDetailsRepository;
 import java.util.Collection;
 import java.util.Optional;
 

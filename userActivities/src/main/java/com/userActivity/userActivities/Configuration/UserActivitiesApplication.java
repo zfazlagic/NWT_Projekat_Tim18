@@ -1,20 +1,14 @@
-package com.userActivity.userActivities;
+package com.userActivity.userActivities.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
-import controllers.activityDetailsController;
-import controllers.userActivityController;
-import models.*;
+import com.userActivity.userActivities.Configuration.controllers.activityDetailsController;
+import com.userActivity.userActivities.Configuration.controllers.userActivityController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 
@@ -25,26 +19,18 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import repositories.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 @ComponentScan(basePackageClasses= userActivityController.class)
 @ComponentScan(basePackageClasses= activityDetailsController.class)
 @EnableDiscoveryClient
-@EntityScan("models")
-@ComponentScan("services")
-@EnableJpaRepositories("repositories")
-@SpringBootApplication(scanBasePackages = {"java"})
+@EntityScan("com/userActivity/userActivities/Configuration/models")
+@ComponentScan("com.userActivity.userActivities.Configuration.services")
+@EnableJpaRepositories("com.userActivity.userActivities.Configuration.repositories")
+@SpringBootApplication
 public class UserActivitiesApplication {
 
     private static final Logger log = LoggerFactory.getLogger(UserActivitiesApplication.class);

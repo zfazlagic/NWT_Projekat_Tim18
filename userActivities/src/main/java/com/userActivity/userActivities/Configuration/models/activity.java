@@ -1,4 +1,4 @@
-package models;
+package com.userActivity.userActivities.Configuration.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
