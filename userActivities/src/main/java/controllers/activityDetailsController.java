@@ -2,6 +2,7 @@ package controllers;
 
 import exceptions.activityDetailsNotFound;
 
+import models.activity;
 import models.activityDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repositories.activityDetailsRepository;
 import services.ActivityDetailsService;
+
+import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/activityDetails")
@@ -44,9 +48,35 @@ public class activityDetailsController {
 
     @DeleteMapping("/removeActivityDetail/{id}")
     ResponseEntity<String> deleteActivityDetailById(@PathVariable Long id) {
+
+        Optional<activityDetails> existingDetail = detailsRepo.findById(id);
+
+        if (!existingDetail.isPresent()) {
+            return new ResponseEntity("Unable to remove. Activity detail with id " + id + " not found.",
+                    HttpStatus.NOT_FOUND);
+        }
+
         detailsRepo.deleteById(id);
         return new ResponseEntity<>("Activity detail with id: " + id + " was deleted!", HttpStatus.OK);
 
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updateActivityDetails(@PathVariable("id") long id,@Valid @RequestBody activityDetails newDetail) {
+
+        Optional<activityDetails> existingDetail = detailsRepo.findById(id);
+
+        if (!existingDetail.isPresent()) {
+            return new ResponseEntity("Unable to update. Activity detail with id " + id + " not found.",
+                    HttpStatus.NOT_FOUND);
+        }
+        existingDetail.get().setBeginDate(newDetail.getBeginDate());
+        existingDetail.get().setEndDate((newDetail.getEndDate()));
+        existingDetail.get().setLocation(newDetail.getLocation());
+        existingDetail.get().setActivityId(newDetail.getActivityId());
+
+        detailsRepo.save(existingDetail.get());
+        return new ResponseEntity<Optional<activityDetails>>(existingDetail, HttpStatus.OK);
     }
 }
 

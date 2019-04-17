@@ -14,6 +14,7 @@ import services.UserActivityService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/activity")
@@ -51,9 +52,34 @@ public class userActivityController {
 
     @DeleteMapping("/removeActivity/{id}")
     ResponseEntity<String> deleteActivityById(@PathVariable Long id) {
+
+        Optional<activity> existingActivity = activityRepo.findById(id);
+
+        if (!existingActivity.isPresent()) {
+            return new ResponseEntity("Unable to delete. Activity with id " + id + " not found.",
+                    HttpStatus.NOT_FOUND);
+        }
+
         activityRepo.deleteById(id);
         return new ResponseEntity<>("Activity with id: " + id + " was deleted!", HttpStatus.OK);
+    }
 
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updateUserActivity(@PathVariable("id") long id,@Valid @RequestBody activity newActivity) {
+
+        Optional<activity> existingActivity = activityRepo.findById(id);
+
+        if (!existingActivity.isPresent()) {
+            return new ResponseEntity("Unable to update. Activity with id " + id + " not found.",
+                    HttpStatus.NOT_FOUND);
+        }
+        existingActivity.get().setCarId(newActivity.getCarId());
+        existingActivity.get().setIsRental(newActivity.getIsRental());
+        existingActivity.get().setIsReservation(newActivity.getIsReservation());
+        existingActivity.get().setUserId(newActivity.getUserId());
+
+        activityRepo.save(existingActivity.get());
+        return new ResponseEntity<Optional<activity>>(existingActivity, HttpStatus.OK);
     }
 }
 
