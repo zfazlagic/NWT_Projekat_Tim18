@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableJpaRepositories("com.cars.repository")
 @ComponentScan(basePackageClasses= CarControler.class)
 @ComponentScan(basePackageClasses= UserController.class)
-@EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
+//@EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
 
 public class CarsApplication {
 

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.amqp.core.Queue;
 
 public class ActivityConfiguration {
+
     @Bean
     public Queue carQueue() {
         System.out.println(("queue sam"));

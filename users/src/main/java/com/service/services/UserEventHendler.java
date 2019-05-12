@@ -20,7 +20,7 @@ public class UserEventHendler {
     private Queue candidateQueue;
 
     @Autowired
-    public UserEventHendler(RabbitTemplate rabbitTemplate, @Qualifier("userCreated")Queue candidateQueue) {
+    public UserEventHendler(RabbitTemplate rabbitTemplate, @Qualifier("userCreated") Queue candidateQueue) {
         this.rabbitTemplate = rabbitTemplate;
         this.candidateQueue = candidateQueue;
     }

@@ -26,7 +26,7 @@ public class CarsApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
+	/*@Test
 	public void postCar() throws Exception {
 
 		Cars ac = new Cars("BMW",true,false);
@@ -50,5 +50,5 @@ public class CarsApplicationTests {
 		assertThat(p.getBody().getCarName()).isEqualTo("BMW");
 
 	}
-
+*/
 }

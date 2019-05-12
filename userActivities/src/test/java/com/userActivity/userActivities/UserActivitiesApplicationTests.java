@@ -42,12 +42,12 @@ public class UserActivitiesApplicationTests {
 	@Test
 	public void postActivity() throws Exception {
 
-		activity ac = new activity(7, 4, 1, 0);
+		activity ac = new activity(1, 4, 1, 0);
 
 		JSONObject js=new JSONObject();
 		js.put("userId", "1");
 		js.put("carId", "4");
-		js.put("isRental", "77");
+		js.put("isRental", "1");
 		js.put("isReservation", "0");
 
 		MappingJackson2HttpMessageConverter jsonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
@@ -61,7 +61,7 @@ public class UserActivitiesApplicationTests {
 				"http://localhost:8083/activity/addActivity",
 				HttpMethod.POST, new HttpEntity<Object>(ac, headers), activity.class);
 		assertThat(p.getStatusCode().value()==200).isTrue();
-		assertThat(p.getBody().getUserId()).isEqualTo(7);
+		assertThat(p.getBody().getUserId()).isEqualTo(1);
 
 	}
 

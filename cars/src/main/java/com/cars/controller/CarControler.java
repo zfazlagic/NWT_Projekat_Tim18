@@ -76,11 +76,18 @@ public class CarControler {
         return carsRepository.save(newCar);
     }
 
-
     @DeleteMapping("/removeCar/{id}")
     ResponseEntity<String> deleteCarById(@PathVariable int id) {
      //   carsRepository.deleteById(id);
         return new ResponseEntity<>("Car with id: " + id + " was deleted!", HttpStatus.OK);
     }
+
+  /*  @GetMapping("/car/dgetDeletable/{deletable}")
+    public List<Cars> getCarByisDeletable (@PathVariable boolean deletable) {
+        List<Cars> cars =  carsRepository.get
+    return cars;
+    }*/
+
+
 
 }
