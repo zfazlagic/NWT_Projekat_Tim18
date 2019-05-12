@@ -1,0 +1,7 @@
+
+FROM openjdk:8-jre-alpine
+
+COPY  ./target/cars-0.0.1-SNAPSHOT.jar /usr/src/cars/
+WORKDIR /usr/src/cars
+EXPOSE 8082
+CMD ["java", "-jar", "cars-0.0.1-SNAPSHOT.jar"]
