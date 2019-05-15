@@ -1,0 +1,6 @@
+FROM openjdk:8-jre-alpine
+
+COPY  ./target/zuulservice-0.0.1-SNAPSHOT.jar /usr/src/zuulservice/
+WORKDIR /usr/src/zuulservice
+EXPOSE 8084
+CMD ["java", "-jar", "zuulservice-0.0.1-SNAPSHOT.jar"]
