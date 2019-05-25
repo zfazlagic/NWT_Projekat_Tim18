@@ -1,0 +1,9 @@
+.card {
+  display: inline-block;
+  margin: 2px;
+  border-color: black;
+}
+
+.card-body > a {
+  color: white;
+}

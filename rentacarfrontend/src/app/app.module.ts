@@ -1,14 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
 import { CarsComponent } from './cars/cars.component';
-import { CarDetailsComponent } from './cars/car-details/car-details.component';
+import { HeaderComponent } from './header/header.component';
 import { HelpComponent } from './help/help.component';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { HomeComponent } from './home/home.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BookingComponent } from './booking/booking.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactComponent } from './contact/contact.component';
+
 
 @NgModule({
   declarations: [
@@ -16,15 +21,24 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     HeaderComponent,
     HomeComponent,
     CarsComponent,
-    CarDetailsComponent,
-    HelpComponent
+    HelpComponent,
+    BookingComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CarouselModule.forRoot(),    
+    CarouselModule.forRoot(),
+    AngularFontAwesomeModule,
+    ModalModule.forRoot(),
+    AccordionModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+

@@ -1,3 +1,25 @@
-<p>
-  help works!
-</p>
+<div class="jumbotron">
+  <h1 class="display-4">Frequently Asked Questions (FAQs)</h1>
+  <p class="lead">This is a simple way to find an answer for some questions you may want to ask.</p>
+  <hr class="my-4">
+  <p>If you have any other questions feel free to contact us!</p>
+  <a class="btn btn-primary btn-lg" href="" role="button">Contact Us!</a>
+</div>
+
+<!-- Existing questions -->
+<accordion [isAnimated]="true">
+  <accordion-group heading="How do I rent a car at your company?">
+    This content is straight in the template.
+  </accordion-group>
+  <accordion-group heading="Am I able to pay using PayPal?">
+    <p>Some content</p>
+  </accordion-group>
+  <accordion-group heading="Where can I pick up my car?">
+    <p>Some content</p>
+  </accordion-group>
+  <accordion-group heading="In which countries are you available?">
+    <p>Some content</p>
+  </accordion-group>
+</accordion>
+
+<!-- FIX THE CONTACT US BUTTON -->

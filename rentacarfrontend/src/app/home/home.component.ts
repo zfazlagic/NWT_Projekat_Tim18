@@ -16,17 +16,22 @@ export class HomeComponent implements OnInit {
       {
         "title": "Audi A6",
         "description": "Default desc",
-        "imgUrl": "../../assets/images/cars/audi.jpg"
+        "imgUrl": "../../assets/images/cars/audia6.jpg"
       },
       {
-        "title": "Mercedes E Class",
+        "title": "Mercedes S Class",
         "description": "Default desc",
-        "imgUrl": "../../assets/images/cars/mercedes.jpg"
+        "imgUrl": "../../assets/images/cars/mercedessclass.jpg"
       },
       {
-        "title": "BMW 5 Series",
+        "title": "BMW X5",
         "description": "Default desc",
-        "imgUrl": "../../assets/images/cars/bmw.jpg"
+        "imgUrl": "../../assets/images/cars/bmwx5.jpg"
+      },
+      {
+        "title": "Volvo XC40",
+        "description": "Default desc",
+        "imgUrl": "../../assets/images/cars/volvoxc40.jpg"
       }
     ];
   }

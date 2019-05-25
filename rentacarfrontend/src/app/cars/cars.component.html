@@ -1,3 +1,31 @@
-<p>
-  cars works!
-</p>
+<div class="card" style="width: 18rem;" *ngFor="let car of cars">
+  <img [src]="car.imgUrls[0]" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"> {{car.brand}} {{car.model}} </h5>
+    <p class="card-text"> {{car.description}} </p>
+    <a class="btn btn-primary nav-link" (click)="openModal(modalCarDetails, car)">Details</a>
+  </div>
+</div>
+
+<ng-template #modalCarDetails>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{carName}} </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <carousel id="carModalSlideShow">
+      <slide *ngFor="let image of carImages">
+        <img [src]="image" style="display: block; width: 100%;">
+      </slide>
+    </carousel>
+    <hr>
+    <p> {{carDescription}} </p>
+    <p> Car year: {{carYear}} </p>
+    <p> Price per day: {{pricePerDay | currency}} </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary">Rent</button>
+  </div>
+</ng-template>
