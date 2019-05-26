@@ -24,6 +24,9 @@
     <p> {{carDescription}} </p>
     <p> Car year: {{carYear}} </p>
     <p> Price per day: {{pricePerDay | currency}} </p>
+    Days for rent:
+    <input type="text" placeholder="Choose your dates" bsDaterangepicker [bsConfig]="dpConfig"   />
+    <!--  -->
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary">Rent</button>

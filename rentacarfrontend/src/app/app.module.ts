@@ -13,6 +13,8 @@ import { BookingComponent } from './booking/booking.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './contact/contact.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ContactComponent } from './contact/contact.component';
     AngularFontAwesomeModule,
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

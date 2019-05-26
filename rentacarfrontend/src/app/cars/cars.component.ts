@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Car } from '../models/car';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-cars',
@@ -14,6 +15,7 @@ export class CarsComponent implements OnInit {
 
   // Modal info
   modalRef: BsModalRef;
+  dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   carName: string; // carName should be equal to carBrand_carModel
   carDescription: string;
@@ -40,12 +42,14 @@ export class CarsComponent implements OnInit {
     this.carImages = currentCar.imgUrls;
   }
 
-  calculateTotalPrice() {
-
+  calculateTotalPrice(numberOfDays: number, car: Car) {
+    // Maybe add more business logic
+    return numberOfDays * car.pricePerDay;
   }
 
   ngOnInit() {
     this.mockDataForFrontEnd();
+    this.dpConfig.containerClass = 'theme-dark-blue';
   }
 
 
