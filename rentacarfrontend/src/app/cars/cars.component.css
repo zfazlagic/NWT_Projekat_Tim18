@@ -4,6 +4,10 @@
   border-color: black;
 }
 
-.card-body > a {
+.card-body>a {
   color: white;
+}
+
+input {
+  width: 50%;
 }

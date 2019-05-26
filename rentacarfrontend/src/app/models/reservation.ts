@@ -6,6 +6,7 @@ export class Reservation {
   public totalPrice: number;
   public startDate: Date;
   public endDate: Date;
+  public isRental?: boolean;
 
   public Reservation() { }
 }

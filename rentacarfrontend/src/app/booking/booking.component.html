@@ -1,7 +1,21 @@
 <div>
   <tabset>
-    <tab heading="Reservation" id="tab1">Reservation</tab>
-    <tab heading="Rental">Rental</tab>
-    <tab heading="Last Bookings">Last Bookings</tab>
+    <tab heading="Reservation" id="tab1">
+      <div *ngIf="reservationExists; else noReservation">
+        <carousel id="carModalSlideShow">
+          <slide *ngFor="let image of reservationInfo.car.imgUrls">
+            <img [src]="image" style="display: block; width: 100%;">
+          </slide>
+        </carousel>
+        <hr>
+        <p> {{reservationInfo.car.description}} </p>
+        <p> Car year: {{reservationInfo.car.year}} </p>
+      </div>
+      <ng-template #noReservation>
+        <h3> You don't have active reservation! </h3>
+      </ng-template>
+    </tab>
+    <tab heading="Rental">Basic content 1</tab>
+    <tab heading="Recent bookings">Basic content 2</tab>
   </tabset>
 </div>

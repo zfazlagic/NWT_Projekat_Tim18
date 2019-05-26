@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Car } from '../models/car';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Reservation } from '../models/reservation';
+import { ReservationService } from '../shared/reservation.service';
 
 @Component({
   selector: 'app-cars',
@@ -10,12 +12,17 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class CarsComponent implements OnInit {
 
+  message: string;
+
   // Update to be array of type Car
   cars: Car[] = [];
 
   // Modal info
   modalRef: BsModalRef;
   dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
+  currentCar: Car;
+  dateRange: any[] = [];
+  dateValid = false;
 
   carName: string; // carName should be equal to carBrand_carModel
   carDescription: string;
@@ -24,8 +31,20 @@ export class CarsComponent implements OnInit {
   totalPrice: number;
   carImages: any[] = [];
 
+  // Reservation service info
+  reservationInfo: Reservation;
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private reservationService: ReservationService) { }
+
+  ngOnInit() {
+    this.mockDataForFrontEnd();
+    this.currentCar = new Car();
+    this.reservationInfo = new Reservation();
+    this.dpConfig.containerClass = 'theme-dark-blue';
+    this.dpConfig.rangeInputFormat = 'YYYY/MM/DD';
+    // Passing data between components
+    this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
+  }
 
   openModal(modalCarDetails: TemplateRef<any>, currentCar: Car) {
     this.modalRef = this.modalService.show(modalCarDetails);
@@ -34,12 +53,47 @@ export class CarsComponent implements OnInit {
   }
 
   setModalData(currentCar: Car) {
-    this.carName = currentCar.brand + " " + currentCar.model;
-    this.carDescription = currentCar.description;
-    this.carYear = currentCar.year;
-    this.pricePerDay = currentCar.pricePerDay;
+    this.currentCar.brand = currentCar.brand;
+    this.currentCar.model = currentCar.model;
+    this.currentCar.description = currentCar.description;
+    this.currentCar.year = currentCar.year;
+    this.currentCar.pricePerDay = currentCar.pricePerDay;
     this.totalPrice = 0;
-    this.carImages = currentCar.imgUrls;
+    this.currentCar.imgUrls = currentCar.imgUrls;
+  }
+
+  onValueChange(event: any) {
+    if (typeof this.dateRange !== 'undefined') {
+      this.dateValid = true;
+      this.dateRange[0] = event[0];
+      this.dateRange[1] = event[1];
+      return;
+    }
+    this.dateValid = false;
+    console.log("CHANGE HAPPENED: " + event + " *** Date range: " + this.dateRange + " Date is valid: " + this.dateValid);
+  }
+
+  onCreateReservation() {
+    this.reservationInfo.id = 0;
+    this.reservationInfo.car = this.currentCar;
+    this.reservationInfo.isRental = false;
+    this.reservationInfo.startDate = this.dateRange[0];
+    this.reservationInfo.endDate = this.dateRange[1];
+    this.modalRef.hide();
+    this.reservationService.addReservation(this.reservationInfo);
+
+    console.log(this.reservationInfo);
+  }
+
+  onRentCar() {
+    this.reservationInfo.id = 0;
+    this.reservationInfo.car = this.currentCar;
+    this.reservationInfo.isRental = true;
+    this.reservationInfo.startDate = this.dateRange[0];
+    this.reservationInfo.endDate = this.dateRange[1];
+    var numberOfDays = this.getNumberOfDays(this.reservationInfo.startDate, this.reservationInfo.endDate);
+    this.reservationInfo.totalPrice = this.calculateTotalPrice(numberOfDays, this.reservationInfo.car);
+    this.modalRef.hide();
   }
 
   calculateTotalPrice(numberOfDays: number, car: Car) {
@@ -47,11 +101,14 @@ export class CarsComponent implements OnInit {
     return numberOfDays * car.pricePerDay;
   }
 
-  ngOnInit() {
-    this.mockDataForFrontEnd();
-    this.dpConfig.containerClass = 'theme-dark-blue';
+  getNumberOfDays(startDate: Date, endDate: Date) {
+    var date1 = startDate;
+    var date2 = endDate;
+    var diffTime = Math.abs(date2.getTime() - date1.getTime());
+    var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    console.log(diffDays);
+    return (diffDays);
   }
-
 
   // Mocking data
 

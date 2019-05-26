@@ -9,26 +9,32 @@
 
 <ng-template #modalCarDetails>
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> {{carName}} </h4>
+    <h4 class="modal-title pull-left"> {{currentCar.brand }} {{currentCar.model}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <carousel id="carModalSlideShow">
-      <slide *ngFor="let image of carImages">
+      <slide *ngFor="let image of currentCar.imgUrls">
         <img [src]="image" style="display: block; width: 100%;">
       </slide>
     </carousel>
     <hr>
-    <p> {{carDescription}} </p>
-    <p> Car year: {{carYear}} </p>
-    <p> Price per day: {{pricePerDay | currency}} </p>
+    <p> {{currentCar.description}} </p>
+    <p> Car year: {{currentCar.year}} </p>
+    <p> Price per day: {{currentCar.pricePerDay | currency}} </p>
     Days for rent:
-    <input type="text" placeholder="Choose your dates" bsDaterangepicker [bsConfig]="dpConfig"   />
+    <input type="text" placeholder="Choose your dates" bsDaterangepicker [bsConfig]="dpConfig"
+      (bsValueChange)="onValueChange($event)" />
     <!--  -->
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary">Rent</button>
+    <button class="btn btn-primary" (click)="onCreateReservation()" routerLink="/booking" [disabled]="!dateValid">Create
+      reservation</button>
+    <button class="btn btn-primary" (click)="onRentCar()" routerLink="/booking" [disabled]="!dateValid">Rent this
+      car</button>
   </div>
 </ng-template>
+
+{{message}}
