@@ -1,5 +1,10 @@
+.carousel-caption {
+  background: white;
+  color: black;
+  opacity: 0;
+}
+
 .jumbotron {
   margin-bottom: 0;
-  padding-bottom: 25px;
-  padding-top: 25px;
+  opacity: 0.6;
 }

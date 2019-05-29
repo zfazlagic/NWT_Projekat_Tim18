@@ -1,17 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Reservation } from '../models/reservation';
+import { Car } from '../models/car';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private reservationInfo = new BehaviorSubject(new Reservation());
-  currentReservation = this.reservationInfo.asObservable();
+
+  reservationInfo: Reservation;
+
+  @Output() reservationSelected: EventEmitter<Reservation> = new EventEmitter();
 
   constructor() { }
 
-  addReservation(reservationInfo: Reservation) {
-    this.reservationInfo.next(reservationInfo);
+  onReservationSelected(reservation: Reservation) {
+    this.reservationSelected.emit(reservation);
+    this.reservationInfo = reservation;
   }
 }

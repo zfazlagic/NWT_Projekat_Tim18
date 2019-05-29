@@ -15,7 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './contact/contact.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

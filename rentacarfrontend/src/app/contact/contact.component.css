@@ -1,0 +1,8 @@
+.jumbotron {
+    margin-bottom: 0;
+    opacity: 0.95;
+}
+
+#message {
+    height: 200px;
+}

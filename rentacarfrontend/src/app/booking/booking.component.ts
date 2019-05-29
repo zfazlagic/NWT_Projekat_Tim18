@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from '../shared/reservation.service';
+import { Car } from '../models/car';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -15,20 +17,19 @@ export class BookingComponent implements OnInit {
   reservationInfo: Reservation;
   reservationExists = false;
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.reservationInfo = new Reservation();
-    this.reservationInfo.id = 0;
-    this.reservationService.currentReservation.subscribe(reservationInfo => this.updateScreen(reservationInfo));
+    this.reservationInfo = this.reservationService.reservationInfo;
+    this.validateBooking(this.reservationInfo);
   }
 
-  updateScreen(reservationInfo: Reservation) {
-    if (typeof reservationInfo === 'undefined' || reservationInfo == null) {
+  validateBooking(reservation: Reservation) {
+    if (typeof reservation === 'undefined') {
       this.reservationExists = false;
+      return;
     }
     this.reservationExists = true;
-    this.reservationInfo = reservationInfo;
   }
 
   selectTab(tabId: number) {
