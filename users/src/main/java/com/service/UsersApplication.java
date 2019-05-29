@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,14 +25,16 @@ import org.springframework.http.MediaType;
 import java.util.List;
 
 
-@SpringBootApplication
+
 @EntityScan("com.service.entities")
 @EnableJpaRepositories("com.service.repositories")
 @EnableDiscoveryClient
 @EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
+@SpringBootApplication
 public class UsersApplication {
 
     private static final Logger log = LoggerFactory.getLogger(UsersApplication.class);
+
 
     public static void main(String[] args) {
         SpringApplication.run(UsersApplication.class, args);
