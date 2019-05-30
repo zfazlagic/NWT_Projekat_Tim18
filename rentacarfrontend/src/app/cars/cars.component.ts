@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Car } from '../models/car';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from '../shared/reservation.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cars',
@@ -32,18 +33,19 @@ export class CarsComponent implements OnInit {
   carImages: any[] = [];
 
   // Reservation service info
-  reservationInfo: Reservation;
+  public reservationInfo: Reservation;
 
-  constructor(private modalService: BsModalService, private reservationService: ReservationService) { }
+  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router) { }
 
   ngOnInit() {
     this.mockDataForFrontEnd();
     this.currentCar = new Car();
     this.reservationInfo = new Reservation();
+    // Config for datepicker
     this.dpConfig.containerClass = 'theme-dark-blue';
     this.dpConfig.rangeInputFormat = 'YYYY/MM/DD';
     // Passing data between components
-    this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
+    //this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
   }
 
   openModal(modalCarDetails: TemplateRef<any>, currentCar: Car) {
@@ -79,10 +81,8 @@ export class CarsComponent implements OnInit {
     this.reservationInfo.isRental = false;
     this.reservationInfo.startDate = this.dateRange[0];
     this.reservationInfo.endDate = this.dateRange[1];
+    this.reservationService.onReservationSelected(this.reservationInfo)
     this.modalRef.hide();
-    this.reservationService.addReservation(this.reservationInfo);
-
-    console.log(this.reservationInfo);
   }
 
   onRentCar() {

@@ -16,8 +16,10 @@ import { ContactComponent } from './contact/contact.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
+
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import {HttpClientModule} from "@angular/common/http";
     TabsModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
