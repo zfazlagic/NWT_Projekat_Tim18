@@ -51,6 +51,7 @@ public class CarControler {
     }
 
     //get all cars
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     ResponseEntity<List<Cars>> listAllCars() {
         List<Cars> cars = (List<Cars>) this.carsRepository.findAll();

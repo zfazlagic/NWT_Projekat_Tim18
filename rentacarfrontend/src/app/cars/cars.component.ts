@@ -5,6 +5,10 @@ import { Car } from '../models/car';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from '../shared/reservation.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CarService } from '../shared/car.service';
+import { CarModel } from '../models/carModel';
 
 @Component({
   selector: 'app-cars',
@@ -13,6 +17,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class CarsComponent implements OnInit {
 
+  carModels: CarModel[];
   message: string;
 
   // Update to be array of type Car
@@ -34,10 +39,12 @@ export class CarsComponent implements OnInit {
 
   // Reservation service info
   public reservationInfo: Reservation;
+  http: any;
 
-  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router) { }
+  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
 
   ngOnInit() {
+    this.carService.getCars().subscribe(cars => this.carModels = cars);
     this.mockDataForFrontEnd();
     this.currentCar = new Car();
     this.reservationInfo = new Reservation();

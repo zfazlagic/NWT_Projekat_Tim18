@@ -5,11 +5,16 @@ import { CarsComponent } from './cars/cars.component';
 import { ContactComponent } from './contact/contact.component';
 import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
+import {RegistrationComponent} from './registration/registration.component';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent
   },
   {
     path: 'cars',

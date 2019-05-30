@@ -5,6 +5,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarsComponent } from './cars/cars.component';
+import {RegistrationComponent} from './registration/registration.component';
 import { HeaderComponent } from './header/header.component';
 import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
@@ -17,10 +18,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
-import { LoginComponent } from './login/login.component';
-import {HttpClientModule} from "@angular/common/http";
-
-
+import { HttpClientModule } from '@angular/common/http'; 
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +30,7 @@ import {HttpClientModule} from "@angular/common/http";
     HelpComponent,
     BookingComponent,
     ContactComponent,
+    RegistrationComponent,
     LoginComponent
   ],
   imports: [

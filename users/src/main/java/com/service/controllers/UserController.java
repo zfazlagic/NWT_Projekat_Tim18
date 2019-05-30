@@ -44,6 +44,7 @@ public class UserController {
 
     //Rabbitmq
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@Valid @RequestBody User user, UriComponentsBuilder ucBuilder) {
         // ako nema usera
@@ -59,6 +60,7 @@ public class UserController {
 
 
     // Get all users from the database
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = (List<User>) this.userRepository.findAll();
@@ -70,6 +72,7 @@ public class UserController {
     }
 
     // Get only one user from the database, specified by ID
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
     ResponseEntity<?> getUserById(@PathVariable Long userid) {
         Optional<User> user = this.userRepository.findById(userid);
@@ -81,6 +84,7 @@ public class UserController {
     }
 
     // Add new user to the database
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> createLocation(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 
@@ -99,6 +103,7 @@ public class UserController {
 
     //Update existing user
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @CrossOrigin(origins = "*")
     public ResponseEntity<?> updateUser(@PathVariable("id") long id,@Valid @RequestBody User newUser) {
 
         Optional<User> existingUser = userRepository.findById(id);
@@ -116,6 +121,7 @@ public class UserController {
 
     // Delete user from the database
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @CrossOrigin(origins = "*")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         // Validate that user exists in the Db
         Optional<User> user = userRepository.findById(id);

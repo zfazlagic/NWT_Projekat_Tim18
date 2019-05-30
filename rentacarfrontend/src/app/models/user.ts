@@ -1,10 +1,17 @@
 export class User {
-    firstName: string;
-    lastName: string;
     username:string;
-    email: string;
     password: string;
-    isVerified: number;
     role: string;
-    createdAt: Date;
+
+    public constructor(
+        username:string,
+        password:string,
+        role: string
+    ){
+
+        this.username = username;
+        this.password = password;
+        this.role = role;
+       
+    }
 }
