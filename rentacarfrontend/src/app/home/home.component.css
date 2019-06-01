@@ -5,6 +5,7 @@
 }
 
 .jumbotron {
-  margin-bottom: 0;
+  margin-bottom: 0px;
   opacity: 0.6;
+  overflow: scroll;
 }

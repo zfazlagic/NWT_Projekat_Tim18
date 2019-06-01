@@ -1,4 +1,4 @@
-<div>
+<div class="jumbotron">
   <tabset>
     <tab heading="Reservation" id="tab1">
       <div *ngIf="reservationExists; else noReservation">
@@ -8,8 +8,10 @@
           </slide>
         </carousel>
         <hr>
-        <p> {{reservationInfo.car.description}} </p>
-        <p> Car year: {{reservationInfo.car.year}} </p>
+        <div>
+          <p> {{reservationInfo.car.description}} </p>
+          <p> Car year: {{reservationInfo.car.year}} </p>
+        </div>
       </div>
       <ng-template #noReservation>
         <h3> You don't have active reservation! </h3>
