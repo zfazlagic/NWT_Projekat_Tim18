@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users**","/sessions/**").hasRole("ADMIN")
                 .antMatchers("/users/find/**").permitAll()
                 .antMatchers("/resources/**","/signup").permitAll()
-                .anyRequest().hasRole("USER")
+                .anyRequest().hasRole("CLIENT")
                 .and()
                 .jee()
                 .mappableRoles("ADMIN","CLIENT");

@@ -24,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
-
+@RequestMapping("/users")
 @RestController
 public class UserController {
 

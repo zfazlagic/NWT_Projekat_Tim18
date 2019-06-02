@@ -8,7 +8,7 @@ import { HttpClient} from "@angular/common/http";
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8081/';
+  baseUrl: string = 'http://localhost:8081/users';
 
   login(loginPayload) {
     const headers = {

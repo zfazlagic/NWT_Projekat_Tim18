@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
 
     createUser(user: User){ 
         let body=JSON.stringify(user);
-        return this.http.post('http://localhost:8081/new', body
+        return this.http.post('http://localhost:8081/users/new', body
     ).pipe(map((res: Response) => {
         if ( res['errcode'] !== '00000') {
           return [];
