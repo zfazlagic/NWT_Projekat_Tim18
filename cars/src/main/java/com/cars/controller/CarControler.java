@@ -1,4 +1,5 @@
 package com.cars.controller;
+
 import com.cars.model.CarDetails;
 import com.cars.repository.CarsDetailsInterface;
 import com.cars.repository.CarsRepository;
@@ -28,9 +29,6 @@ public class CarControler {
     @Autowired
     CarEventHandler carEventHandler;
 
-
-
-
     public CarControler(CarsRepository carsRepository) {
         this.carsRepository = carsRepository;
 
@@ -50,7 +48,7 @@ public class CarControler {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
-    //get all cars
+    // get all cars
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     ResponseEntity<List<Cars>> listAllCars() {
@@ -59,18 +57,19 @@ public class CarControler {
     }
 
     // get car by id
-       @GetMapping("/car/{id}")
-       public Cars getCarById (@PathVariable int id) {
+    @GetMapping("/car/{id}")
+    public Cars getCarById(@PathVariable int id) {
         return carsRepository.findById(id);
     }
 
-        @PutMapping("/delete/{id}")
-        public Cars deteteCar(@PathVariable int id) {
+    @PutMapping("/delete/{id}")
+    public Cars deteteCar(@PathVariable int id) {
 
-        Cars car=this.carsRepository.findById(id);
+        Cars car = this.carsRepository.findById(id);
         car.setDeletable(true);
-       return carsRepository.save(car);
+        return carsRepository.save(car);
     }
+
     // add new car
     @PostMapping("/addCar")
     Cars addNewCar(@RequestBody Cars newCar) {
@@ -79,7 +78,7 @@ public class CarControler {
 
     @DeleteMapping("/removeCar/{id}")
     ResponseEntity<String> deleteCarById(@PathVariable int id) {
-     //   carsRepository.deleteById(id);
+        //   carsRepository.deleteById(id);
         return new ResponseEntity<>("Car with id: " + id + " was deleted!", HttpStatus.OK);
     }
 
@@ -88,7 +87,6 @@ public class CarControler {
         List<Cars> cars =  carsRepository.get
     return cars;
     }*/
-
 
 
 }

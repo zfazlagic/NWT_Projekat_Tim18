@@ -7,113 +7,141 @@ import javax.validation.constraints.Size;
 @Entity
 public class CarDetails {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-    @NotNull(message = "Car name cannot be null")
-    @Size(min = 1, max = 200, message = "Car name must be between 5 and 200 characters")
-    private String carName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @NotNull(message = "Car brand cannot be null")
+    private String brand;
+
+    @NotNull(message = "Car model cannot be null")
+    private String model;
+
+    @NotNull(message = "Car year cannot be null")
+    private int year;
+
+    @NotNull(message = "Number of seats cannot be null")
+    private int seatNumber;
+
+    @NotNull(message = "Car description cannot be null")
+    private String description;
 
     @NotNull(message = "Car type cannot be null")
     @Size(min = 5, max = 200, message = "Car type must be between 5 and 200 characters")
     private String carType;
 
-    @NotNull(message = " Year model cannot be null")
-    private int yearModel;
-
-    @NotNull(message = "Licence cannot be null")
-    // @Size(min = 5, max = 200, message = "Name must be between 5 and 200 characters")
-    private String police;
     @NotNull(message = "Number of seats cannot be null")
-    private  int numberOfSeats;
+    private double pricePerDay;
 
     @NotNull(message = "isAvailable field cannot be null")
     private boolean isAvailable;
 
+    private String carImg;
+
     @NotNull(message = "Car ID cannot be null")
     private int carId;
 
-    public CarDetails(){}
-
-    public CarDetails(String carName, String carType, int yearModel, String police, int numberOfSeats, boolean isAvailable, int carId) {
-        this.carName = carName;
-        this.carType = carType;
-        this.yearModel = yearModel;
-        this.police = police;
-        this.numberOfSeats = numberOfSeats;
-        this.isAvailable = isAvailable;
-        this.carId = carId;
+    public CarDetails() {
     }
 
-
-    public void setId(int id) {
+    public CarDetails(int id, @NotNull(message = "Car brand cannot be null") String brand, @NotNull(message = "Car model cannot be null") String model, @NotNull(message = "Car year cannot be null") int year, @NotNull(message = "Number of seats cannot be null") int seatNumber, @NotNull(message = "Car description cannot be null") String description, @NotNull(message = "Car type cannot be null") @Size(min = 5, max = 200, message = "Car type must be between 5 and 200 characters") String carType, @NotNull(message = "Number of seats cannot be null") double pricePerDay, @NotNull(message = "isAvailable field cannot be null") boolean isAvailable, String carImg, @NotNull(message = "Car ID cannot be null") int carId) {
         this.id = id;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
-
-    public void setCarType(String carType) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.seatNumber = seatNumber;
+        this.description = description;
         this.carType = carType;
-    }
-
-    public void setYearModel(int yearModel) {
-        this.yearModel = yearModel;
-    }
-
-    public void setPolice(String police) {
-        this.police = police;
-    }
-
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "carId")
-    public void setCarId(int carId) {
+        this.pricePerDay = pricePerDay;
+        this.isAvailable = isAvailable;
+        this.carImg = carImg;
         this.carId = carId;
     }
 
-
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public String getCarName() {
-        return carName;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCarType() {
         return carType;
     }
 
-    public int getYearModel() {
-        return yearModel;
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
-    public String getPolice() {
-        return police;
+    public double getPricePerDay() {
+        return pricePerDay;
     }
 
-    public int getNumberOfSeats() {
-        return numberOfSeats;
+    public void setPricePerDay(double pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 
     public boolean isAvailable() {
         return isAvailable;
     }
 
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public String getCarImg() {
+        return carImg;
+    }
+
+    public void setCarImg(String carImg) {
+        this.carImg = carImg;
+    }
+
     public int getCarId() {
         return carId;
     }
 
-
-
-
+    public void setCarId(int carId) {
+        this.carId = carId;
+    }
 }
