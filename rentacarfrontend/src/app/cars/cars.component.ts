@@ -1,14 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Car } from '../models/car';
-import { Reservation } from '../models/reservation';
-import { ReservationService } from '../shared/reservation.service';
-import { NavigationExtras, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { CarService } from '../shared/car.service';
 import { CarModel } from '../models/carModel';
+import { Reservation } from '../models/reservation';
+import { CarService } from '../shared/car.service';
+import { ReservationService } from '../shared/reservation.service';
 
 @Component({
   selector: 'app-cars',
@@ -44,8 +42,8 @@ export class CarsComponent implements OnInit {
   constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
 
   ngOnInit() {
-    this.carService.getCars().subscribe(cars => this.carModels = cars);
-    this.mockDataForFrontEnd();
+    this.carService.getCars().subscribe(cars => this.cars = cars);
+    //this.mockDataForFrontEnd();
     this.currentCar = new Car();
     this.reservationInfo = new Reservation();
     // Config for datepicker
@@ -117,7 +115,7 @@ export class CarsComponent implements OnInit {
     return (diffDays);
   }
 
-  // Mocking data
+  /* Mocking data
 
   mockDataForFrontEnd() {
     var car1 = new Car();
@@ -140,9 +138,9 @@ export class CarsComponent implements OnInit {
     car2.imgUrls.push("../../assets/images/cars/audia6.jpg");
     car2.imgUrls.push("../../assets/images/cars/audia62.jpg");
 
-    this.cars.push(car1);
-    this.cars.push(car2);
-  }
+    //this.cars.push(car1);
+    //this.cars.push(car2);
+  }*/
 
 
 

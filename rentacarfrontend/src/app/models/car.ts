@@ -3,12 +3,15 @@ export class Car {
   brand: string;
   model: string;
   year: number;
+  seatNumber: number;
   description: string;
-  imgUrls: any[];
+  carType: string;
+  imgUrls: string;
   pricePerDay: number;
+  isAvailable: boolean;
 
   public Car() {
-    this.imgUrls = [];
+    
   }
 }
 
