@@ -7,6 +7,10 @@ import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
 import {RegistrationComponent} from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { LoggedInGuard } from './guards/logged-in.guard';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { AdminGuard } from './guards/adminGuard';
 
 const routes: Routes = [
   {
@@ -15,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'registration',
-    component: RegistrationComponent
+    component: RegistrationComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'cars',
@@ -27,7 +32,8 @@ const routes: Routes = [
   },
   {
     path: 'booking',
-    component: BookingComponent
+    component: BookingComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'contact',
@@ -35,7 +41,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'manageUsers',
+    component: ManageUsersComponent,
+    canActivate:[AdminGuard]
   },
   {
     path: '',

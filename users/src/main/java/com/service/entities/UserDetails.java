@@ -2,7 +2,9 @@ package com.service.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -21,20 +23,21 @@ public class UserDetails {
     @Column(name = "lastName")
     private String lastname;
 
+    @Column(name = "username")
+    @NotEmpty(message = "Username CANNOT be empty!")
+    @Size(min = 5, max = 15, message = "Username must have more than 5  and less than 15 characters!")
+    private String username;
+
     @NotEmpty(message = "Field email cannot be empty!")
     @Column(name = "email")
     @Pattern(regexp = "^(?:(?:[\\w`~!#$%^&*\\-=+;:{}'|,?\\/]+(?:(?:\\.(?:\"(?:\\\\?[\\w`~!#$%^&*\\-=+;:{}'|,?\\/\\.()<>\\[\\] @]|\\\\\"|\\\\\\\\)*\"|[\\w`~!#$%^&*\\-=+;:{}'|,?\\/]+))*\\.[\\w`~!#$%^&*\\-=+;:{}'|,?\\/]+)?)|(?:\"(?:\\\\?[\\w`~!#$%^&*\\-=+;:{}'|,?\\/\\.()<>\\[\\] @]|\\\\\"|\\\\\\\\)+\"))@(?:[a-zA-Z\\d\\-]+(?:\\.[a-zA-Z\\d\\-]+)*|\\[\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\])$")
     private String email;
 
-    @NotEmpty(message = "Field createdAt cannot be empty!")
-    @Column(name = "createdAt")
-    private Date createdAt;
-
-    @NotEmpty(message = "Field verified cannot be empty!")
+    @NotNull(message = "Field verified cannot be empty!")
     @Column(name = "verified")
     private Integer verified;
 
-    @NotEmpty(message = "Field userActivities cannot be empty!")
+
     @Column(name = "userActivities")
     private Long userActivity;
 
@@ -44,16 +47,20 @@ public class UserDetails {
     protected UserDetails() {
     }
 
-    public UserDetails(String firstname, String lastname, String email, Date createdAt, int verified, Long userActivity) {
+    public UserDetails(String firstname, String lastname, String username, String email, int verified, Long userActivity) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.username = username;
         this.email = email;
-        this.createdAt = createdAt;
         this.verified = verified;
         this.userActivity = userActivity;
     }
 
     // Get and Set Methods
+
+    public String getUsername(){ return username;}
+
+    public void setUsername(String username){ this.username = username;}
 
     public Long getId() {
         return id;
@@ -85,14 +92,6 @@ public class UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Integer isVerified() {

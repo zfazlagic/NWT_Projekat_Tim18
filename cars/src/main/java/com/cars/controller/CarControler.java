@@ -57,12 +57,14 @@ public class CarControler {
     }
 
     // get car by id
+    @CrossOrigin(origins = "*")
     @GetMapping("/car/{id}")
     public Cars getCarById(@PathVariable int id) {
         return carsRepository.findById(id);
     }
 
     @PutMapping("/delete/{id}")
+    @CrossOrigin(origins = "*")
     public Cars deteteCar(@PathVariable int id) {
 
         Cars car = this.carsRepository.findById(id);
@@ -71,11 +73,13 @@ public class CarControler {
     }
 
     // add new car
+    @CrossOrigin(origins = "*")
     @PostMapping("/addCar")
     Cars addNewCar(@RequestBody Cars newCar) {
         return carsRepository.save(newCar);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/removeCar/{id}")
     ResponseEntity<String> deleteCarById(@PathVariable int id) {
         //   carsRepository.deleteById(id);

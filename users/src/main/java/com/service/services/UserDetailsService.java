@@ -20,9 +20,9 @@ public class UserDetailsService {
     private UserRepository userRepository;
     
     void saveUserDetails(String role, String username, String password, String firstName, String lastName,
-                         String email, Long userActivities, Integer verified, Date createdAt) {
+                         String email, Long userActivities, Integer verified) {
 
-        UserDetails userDetails = new UserDetails(firstName,lastName,email,createdAt,verified,userActivities);
+        UserDetails userDetails = new UserDetails(firstName,lastName,username,email,verified,userActivities);
         //User user = new User(role, username, password, userDetails);
         //userRepository.save(user);
         userDetailsRepository.save(userDetails);
