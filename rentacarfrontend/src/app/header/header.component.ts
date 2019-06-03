@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
-
-  
+ 
+  adminVisible: string;
+  visible: boolean;
+  constructor(private userService: UserService, private router: Router) {
+    
+   }
 
   ngOnInit() {
-  }
+    this.userService.loggedIn$.subscribe((loggedIn: boolean) => {
+      this.visible = loggedIn;
+  });
+  this.userService.role$.subscribe((role:string)=>{
+    this.adminVisible = role;
+    console.log(role);
+  });
+  
+}
 
+
+logOut() {
+this.userService.signOut();
+this.visible=false;
+}
 }

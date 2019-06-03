@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http'; 
 import {LoginComponent} from './login/login.component';
+import { AngularWebStorageModule } from 'angular-web-storage';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {LoginComponent} from './login/login.component';
     BookingComponent,
     ContactComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ManageUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {LoginComponent} from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularWebStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

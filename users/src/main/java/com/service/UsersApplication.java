@@ -2,6 +2,8 @@ package com.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.entities.User;
+import com.service.entities.UserDetails;
+import com.service.repositories.UserDetailRepository;
 import com.service.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +53,7 @@ public class UsersApplication {
             repository.save(new User("Client", "nnikic", "sifra123"));
             //repository.save(new User("Client", "ttestic", "sifra"));
 
-
+//            details.save(new UserDetails("zerina","fazlagic", "zfazlagic", "zerina@hotmail.com", 1, null));
             // fetch all customers
             log.info("Users found with getAllUsers():");
             log.info("-------------------------------");

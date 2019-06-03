@@ -24,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -83,19 +84,30 @@ public class UserController {
         return new ResponseEntity<Optional<User>>(user, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "user/{username}")
+    ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        Optional<User> user = this.userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            // may implement custom exception, better practice
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Optional<User>>(user, HttpStatus.OK);
+    }
+
     // Add new user to the database
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> createLocation(@Valid @RequestBody User user, UriComponentsBuilder builder) {
+    public ResponseEntity<?> createLocation(@Valid @RequestBody User user) {
 
         // Check if username already exists
         Iterable<User> users = userRepository.findAll();
-        /*if (!users.()) {
+
             for (User u : users) {
                 if (u.getUsername() == user.getUsername())
                     return new ResponseEntity("User with this username already exists!", HttpStatus.CONFLICT);
             }
-        }*/
+
 
         // Need to check if update to UserDetails TABLE is required...
         return new ResponseEntity<String>(HttpStatus.CREATED);
