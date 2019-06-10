@@ -8,6 +8,7 @@ import { Reservation } from '../models/reservation';
 import { CarService } from '../shared/car.service';
 import { ReservationService } from '../shared/reservation.service';
 
+
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
@@ -20,6 +21,7 @@ export class CarsComponent implements OnInit {
 
   // Update to be array of type Car
   cars: Car[] = [];
+  carImagesInfo: any[] = [];
 
   // Modal info
   modalRef: BsModalRef;
@@ -33,30 +35,51 @@ export class CarsComponent implements OnInit {
   carYear: number;
   pricePerDay: number;
   totalPrice: number;
-  carImages: any[] = [];
+  imageUrl: any[] = [];
 
   // Reservation service info
   public reservationInfo: Reservation;
   http: any;
 
-  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
+  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) {}
 
   ngOnInit() {
-    this.carService.getCars().subscribe(cars => this.cars = cars);
-    //this.mockDataForFrontEnd();
+    this.carService.getCarImages().subscribe(imageInfos => this.carImagesInfo = imageInfos);
+    this.carService.getCars().subscribe(
+      cars => {
+        this.cars = cars;
+        this.mapImagesForCars();
+      });
+    // this.mockDataForFrontEnd();
     this.currentCar = new Car();
     this.reservationInfo = new Reservation();
     // Config for datepicker
     this.dpConfig.containerClass = 'theme-dark-blue';
     this.dpConfig.rangeInputFormat = 'YYYY/MM/DD';
     // Passing data between components
-    //this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
+    // this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
   }
 
   openModal(modalCarDetails: TemplateRef<any>, currentCar: Car) {
     this.modalRef = this.modalService.show(modalCarDetails);
     this.setModalData(currentCar);
     console.log(currentCar);
+  }
+
+  mapImagesForCars() {
+
+    this.cars.forEach(car => {
+      for (let imageInfo of this.carImagesInfo) {
+        if (imageInfo.carId === car.id) {
+          let temp = new Car();
+          temp = car;
+          temp.imgUrls = [];
+          car.imgUrls.push(imageInfo.imageUrl);
+          console.log("mapImages: " + car);
+        }
+      }
+    });
+
   }
 
   setModalData(currentCar: Car) {

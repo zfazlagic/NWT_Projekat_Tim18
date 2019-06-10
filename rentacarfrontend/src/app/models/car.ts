@@ -6,12 +6,12 @@ export class Car {
   seatNumber: number;
   description: string;
   carType: string;
-  imgUrls: string;
+  imgUrls: any[];
   pricePerDay: number;
   isAvailable: boolean;
 
   public Car() {
-    
+    this.imgUrls = [];
   }
 }
 

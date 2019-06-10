@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Car } from '../models/car';
+import { ImageInfo } from '../models/imageInfo';
 
 
 @Injectable({
@@ -12,9 +13,9 @@ import { Car } from '../models/car';
 export class CarService {
 
   carDetailsUrl = 'http://localhost:8082/carDetails/all';
+  carImagesUrl = '../../assets/imageInfo.json';
 
   constructor(private http: HttpClient) { }
-
 
   getCars(): Observable<Car[]> {
     return this.http.get(this.carDetailsUrl).pipe(map((res: Car[]) => {
@@ -23,6 +24,12 @@ export class CarService {
     }));
   }
 
+  getCarImages(): Observable<ImageInfo[]> {
+    return this.http.get(this.carImagesUrl).pipe(map((res: ImageInfo[]) => {
+      console.log(res);
+      return res;
+    }));
+  }
 }
 
 
