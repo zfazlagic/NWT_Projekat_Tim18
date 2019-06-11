@@ -1,22 +1,22 @@
 [
   {
     "carId": 1,
-    "imageUrl": "cars/audia6.jpg"
+    "imageUrl": "../assets/images/cars/audia6.jpg"
   },
   {
     "carId": 1,
-    "imageUrl": "cars/audia62.jpg"
+    "imageUrl": "../assets/images/cars/audia62.jpg"
   },
   {
     "carId": 2,
-    "imageUrl": "cars/bmwx5.jpg"
+    "imageUrl": "../assets/images/cars/bmwx5.jpg"
   },
   {
     "carId": 3,
-    "imageUrl": "cars/mercedessclass.jpg"
+    "imageUrl": "../assets/images/cars/mercedessclass.jpg"
   },
   {
     "carId": 4,
-    "imageUrl": "cars/volvoxc40.jpg"
+    "imageUrl": "../assets/images/cars/volvoxc40.jpg"
   }
 ]

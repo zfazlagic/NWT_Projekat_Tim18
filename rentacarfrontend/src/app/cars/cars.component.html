@@ -1,5 +1,21 @@
+<div class="btn-group" dropdown>
+  <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+    aria-controls="dropdown-basic">
+    Filter By <span class="caret"></span>
+  </button>
+  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+    <li role="menuitem"><a class="dropdown-item" (click)="sortByName()">Name</a></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="sortByCarYear()">Car Year</a></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="sortByPrice('asc')">Price(ASC)</a></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="sortByPrice('desc')">Price(DESC)</a></li>
+    <li class="divider dropdown-divider"></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="sortByPrice()">Separated link</a>
+    </li>
+  </ul>
+</div>
+<br>
 <div class="card" style="width: 18rem;" *ngFor="let car of cars">
-  <img src="{{car?.imgUrls}}" class="card-img-top" alt="...">
+  <img src="{{car?.imgUrls[0]}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"> {{car.brand}} {{car.model}} </h5>
     <p class="card-text"> {{car.description}} </p>
@@ -27,7 +43,6 @@
     Days for rent:
     <input type="text" placeholder="Choose your dates" bsDaterangepicker [bsConfig]="dpConfig"
       (bsValueChange)="onValueChange($event)" />
-    <!--  -->
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" (click)="onCreateReservation()" routerLink="/booking" [disabled]="!dateValid">Create
@@ -38,4 +53,3 @@
 </ng-template>
 
 {{message}}
-<button (click)="onTestClick()">BUTTON</button>

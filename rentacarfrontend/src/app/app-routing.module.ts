@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookingComponent } from './booking/booking.component';
 import { CarsComponent } from './cars/cars.component';
 import { ContactComponent } from './contact/contact.component';
+import { AdminGuard } from './guards/adminGuard';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { LoggedInGuard } from './guards/logged-in.guard';
 import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
-import {RegistrationComponent} from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { LoggedInGuard } from './guards/logged-in.guard';
-import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
-import { AdminGuard } from './guards/adminGuard';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'manageUsers',
     component: ManageUsersComponent,
-    canActivate:[AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: '',

@@ -41,7 +41,7 @@ export class CarsComponent implements OnInit {
   public reservationInfo: Reservation;
   http: any;
 
-  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) {}
+  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
 
   ngOnInit() {
     this.carService.getCarImages().subscribe(imageInfos => this.carImagesInfo = imageInfos);
@@ -67,14 +67,13 @@ export class CarsComponent implements OnInit {
   }
 
   mapImagesForCars() {
-
     this.cars.forEach(car => {
+      let temp = new Car();
+      temp = car;
+      temp.imgUrls = [];
       for (let imageInfo of this.carImagesInfo) {
         if (imageInfo.carId === car.id) {
-          let temp = new Car();
-          temp = car;
-          temp.imgUrls = [];
-          car.imgUrls.push(imageInfo.imageUrl);
+          temp.imgUrls.push(imageInfo.imageUrl);
           console.log("mapImages: " + car);
         }
       }
@@ -109,7 +108,8 @@ export class CarsComponent implements OnInit {
     this.reservationInfo.isRental = false;
     this.reservationInfo.startDate = this.dateRange[0];
     this.reservationInfo.endDate = this.dateRange[1];
-    this.reservationService.onReservationSelected(this.reservationInfo)
+    this.reservationInfo.totalPrice = this.calculateTotalPrice(this.getNumberOfDays(this.reservationInfo.startDate, this.reservationInfo.endDate), this.currentCar);
+    this.reservationService.onReservationSelected(this.reservationInfo);
     this.modalRef.hide();
   }
 
@@ -121,6 +121,7 @@ export class CarsComponent implements OnInit {
     this.reservationInfo.endDate = this.dateRange[1];
     var numberOfDays = this.getNumberOfDays(this.reservationInfo.startDate, this.reservationInfo.endDate);
     this.reservationInfo.totalPrice = this.calculateTotalPrice(numberOfDays, this.reservationInfo.car);
+    this.reservationService.onReservationSelected(this.reservationInfo);
     this.modalRef.hide();
   }
 
@@ -136,6 +137,27 @@ export class CarsComponent implements OnInit {
     var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
     console.log(diffDays);
     return (diffDays);
+  }
+
+  sortByName() {
+    this.cars.sort(function (a, b) {
+      if (a.brand < b.brand) { return -1; }
+      if (a.brand > b.brand) { return 1; }
+      return 0;
+    });
+  }
+
+  sortByPrice(type: string) {
+    if (type === 'asc') {
+      this.cars.sort((a, b) => b.pricePerDay - a.pricePerDay);
+    }
+    if (type === 'desc') {
+      this.cars.sort((a, b) => a.pricePerDay - b.pricePerDay);
+    }
+  }
+
+  sortByCarYear() {
+    this.cars.sort((a, b) => b.year - a.year);
   }
 
   /* Mocking data

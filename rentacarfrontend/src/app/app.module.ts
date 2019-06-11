@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatTabsModule,
-    AngularWebStorageModule
+    AngularWebStorageModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

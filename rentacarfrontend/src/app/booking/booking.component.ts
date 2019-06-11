@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from '../shared/reservation.service';
-import { Car } from '../models/car';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -13,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class BookingComponent implements OnInit {
 
   @ViewChild('staticTabs') staticTabs: TabsetComponent;
+
+  tabTitle = "Reservation";
 
   reservationInfo: Reservation;
   reservationExists = false;
@@ -28,6 +29,9 @@ export class BookingComponent implements OnInit {
     if (typeof reservation === 'undefined') {
       this.reservationExists = false;
       return;
+    }
+    if (reservation.isRental) {
+      this.tabTitle = "Rental";
     }
     this.reservationExists = true;
   }
