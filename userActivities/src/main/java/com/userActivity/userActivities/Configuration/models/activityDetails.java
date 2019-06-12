@@ -61,7 +61,7 @@ public class activityDetails {
     @NotNull(message = "endDate can't be null.")
     private Date endDate;
 
-    @Column(name = "location", nullable = false)
+    @Column(name = "location")
     @NotEmpty(message = "Location can't be empty.")
     @Size(min = 3, max = 15, message = "Location must be between 3 and 15 characters")
     @Pattern(regexp = "^[a-zA-Z]+[-_]*[a-zA-Z]", message = "Location only can contain letters")

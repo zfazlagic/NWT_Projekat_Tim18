@@ -19,7 +19,7 @@
           <p>{{reservationInfo.car.year}}</p>
           <hr>
           <h3><b>Total price: {{reservationInfo.totalPrice | currency}}</b></h3>
-          <button class="btn btn-info">Confirm</button>
+          <button class="btn btn-info" (click)="onConfirmClick()">Confirm</button>
         </div>
       </div>
       <ng-template #noReservation>

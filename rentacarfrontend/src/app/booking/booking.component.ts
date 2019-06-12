@@ -40,4 +40,8 @@ export class BookingComponent implements OnInit {
     this.staticTabs.tabs[tabId].active = true;
   }
 
+  onConfirmClick() {
+    this.reservationService.createReservation();
+  }
+
 }
