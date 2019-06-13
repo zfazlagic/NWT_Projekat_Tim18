@@ -16,10 +16,12 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="cars">Cars</a>
       </li>
-      <li class="nav-item" *ngIf='visible && adminVisible=="client"' >
+      <!-- <li class="nav-item"> -->
+     <li class="nav-item" *ngIf='visible'> 
         <a class="nav-link" routerLink="booking">Manage my Booking</a>
       </li>
-      <li class="nav-item" *ngIf='visible && adminVisible=="admin"'>
+      <!-- <li class="nav-item"> -->
+       <li class="nav-item" *ngIf='visible'>
         <a class="nav-link" routerLink="manageUsers">Manage users</a>
       </li>
       <li class="nav-item">

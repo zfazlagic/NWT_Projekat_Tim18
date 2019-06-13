@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import {UserService} from '../shared/user.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'angular-web-storage';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private userService: UserService, private router:Router){
+  constructor(private localStorage: LocalStorageService,private userService: UserService, private router:Router){
 
   }
 
@@ -18,7 +19,7 @@ export class AdminGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       
-      if(this.userService.Role()=="admin"){
+      if(this.localStorage.get("role")=="admin"){
         return true;
       }else{
         window.alert("You don't have permission to view this page. Just admin can view this page.");

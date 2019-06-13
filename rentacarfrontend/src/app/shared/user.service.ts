@@ -69,10 +69,9 @@ export class UserService {
   Role() { return JSON.parse(this.storage.get('admin')); }
   LoggedIn() { return JSON.parse(this.storage.get('loggedIn')); }
 
-  signOut() {
-    if (this.LoggedIn()) {
-      this.setLoggedIn(false);
-      this.setRole('');
+ signOut(){
+   if(this.LoggedIn()){
+      localStorage.clear();
       this.router.navigate(['/home']);
       window.alert("You are logged out.");
     }

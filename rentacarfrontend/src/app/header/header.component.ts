@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-header',
@@ -8,22 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
- 
-  adminVisible: string;
-  visible: boolean;
-  constructor(private userService: UserService, private router: Router) {
-    
+  admin:string;
+  visible : boolean;
+  constructor(private localStorage: LocalStorageService,private userService: UserService, private router: Router) {
    }
 
   ngOnInit() {
     this.userService.loggedIn$.subscribe((loggedIn: boolean) => {
       this.visible = loggedIn;
   });
-  this.userService.role$.subscribe((role:string)=>{
-    this.adminVisible = role;
-    console.log(role);
-  });
+  this.admin = this.localStorage.get("role");
   
 }
 

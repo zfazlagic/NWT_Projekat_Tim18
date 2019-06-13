@@ -7,6 +7,8 @@ import { CarModel } from '../models/carModel';
 import { Reservation } from '../models/reservation';
 import { CarService } from '../shared/car.service';
 import { ReservationService } from '../shared/reservation.service';
+import { first } from 'rxjs/operators';
+import { LocalStorageService } from 'angular-web-storage';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { ReservationService } from '../shared/reservation.service';
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit {
-
+  admin: boolean;
   carModels: CarModel[];
   message: string;
 
@@ -41,7 +43,7 @@ export class CarsComponent implements OnInit {
   public reservationInfo: Reservation;
   http: any;
 
-  constructor(private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
+  constructor(private localStorage: LocalStorageService,private modalService: BsModalService, private reservationService: ReservationService, private router: Router, private carService: CarService) { }
 
   ngOnInit() {
     this.carService.getCarImages().subscribe(imageInfos => this.carImagesInfo = imageInfos);
@@ -58,6 +60,7 @@ export class CarsComponent implements OnInit {
     this.dpConfig.rangeInputFormat = 'YYYY/MM/DD';
     // Passing data between components
     // this.reservationService.currentReservation.subscribe(reservationInfo => this.reservationInfo = reservationInfo)
+    this.admin = this.localStorage.get("role");
   }
 
   openModal(modalCarDetails: TemplateRef<any>, currentCar: Car) {
@@ -159,6 +162,16 @@ export class CarsComponent implements OnInit {
 
   sortByCarYear() {
     this.cars.sort((a, b) => b.year - a.year);
+  }
+
+  deleteCar(carId){
+    this.carService.deleteCar(carId).pipe(first()).subscribe(data => {console.log("user deleted");});
+  
+      for(let i = 0; i < this.cars.length; ++i){
+          if (this.cars[i].id === carId) {
+              this.cars.splice(i,1);
+          }
+      }
   }
 
   /* Mocking data

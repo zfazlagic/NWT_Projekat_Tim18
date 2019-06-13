@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/carDetails")
@@ -57,9 +58,16 @@ public class CarDetailsContoller {
         return carsDetailsInterface.save(car);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/removeCarDetails/{id}")
-    ResponseEntity<String> deleteCarDetailsById(@PathVariable int id) {
-        //carsDetailsInterface.deleteById(id);
-        return new ResponseEntity<>("Car details with id: " + id + " was deleted!", HttpStatus.OK);
+    public ResponseEntity<?> deleteCar(@PathVariable("id") Long id) {
+        this.carDetailsRepository.deleteById(id);
+        return new ResponseEntity<CarDetails>(HttpStatus.NO_CONTENT);
     }
+//    @CrossOrigin(origins = "*")
+//    @DeleteMapping("/removeCarDetails/{id}")
+//    ResponseEntity<String> deleteCarDetailsById(@PathVariable int id) {
+//        //carsDetailsInterface.deleteById(id);
+//        return new ResponseEntity<>("Car details with id: " + id + " was deleted!", HttpStatus.OK);
+//    }
 }

@@ -19,7 +19,12 @@
   <div class="card-body">
     <h5 class="card-title"> {{car.brand}} {{car.model}} </h5>
     <p class="card-text"> {{car.description}} </p>
+    <div *ngIf='admin == "admin"'>
+    <i (click)="deleteCar(car.id)" class = "fa fa-trash" style="color: rgb(245, 202, 202)"></i>
+  </div>
+  <div *ngIf='admin != "admin"'>
     <a class="btn btn-primary nav-link" (click)="openModal(modalCarDetails, car)">Details</a>
+  </div>
   </div>
 </div>
 

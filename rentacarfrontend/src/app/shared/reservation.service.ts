@@ -23,6 +23,8 @@ export class ReservationService {
   }
 
   createReservation() {
+    
+    debugger;
     let activity = this.createNewActivity();
 
     const headers = {
@@ -55,7 +57,7 @@ export class ReservationService {
   createNewActivity() {
     let activity = new Activity();
     // Fix this!
-    activity.userId = 0;
+    activity.userId = 8888;
     activity.carId = this.reservationInfo.car.id;
     activity.isRental = this.reservationInfo.isRental ? 1 : 0;
     activity.isReservation = !this.reservationInfo.isRental ? 1 : 0;

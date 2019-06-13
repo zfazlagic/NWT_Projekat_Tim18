@@ -30,6 +30,10 @@ export class CarService {
       return res;
     }));
   }
+
+  deleteCar(carId: number){
+    return this.http.delete('http://localhost:8082/carDetails/removeCarDetails/'+ carId,{responseType:'json'});
+  }
 }
 
 
