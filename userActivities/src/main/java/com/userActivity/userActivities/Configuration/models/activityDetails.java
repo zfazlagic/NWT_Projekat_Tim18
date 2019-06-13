@@ -62,9 +62,8 @@ public class activityDetails {
     private Date endDate;
 
     @Column(name = "location")
-    @NotEmpty(message = "Location can't be empty.")
-    @Size(min = 3, max = 15, message = "Location must be between 3 and 15 characters")
-    @Pattern(regexp = "^[a-zA-Z]+[-_]*[a-zA-Z]", message = "Location only can contain letters")
+    //@Size(min = 3, max = 15, message = "Location must be between 3 and 15 characters")
+    //@Pattern(regexp = "^[a-zA-Z]+[-_]*[a-zA-Z]", message = "Location only can contain letters")
     private String location;
 
     @Column(name = "activityId", nullable = false, unique=true)

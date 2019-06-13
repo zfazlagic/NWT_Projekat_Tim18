@@ -82,6 +82,7 @@ export class CarsComponent implements OnInit {
   }
 
   setModalData(currentCar: Car) {
+    this.currentCar.id = currentCar.id;
     this.currentCar.brand = currentCar.brand;
     this.currentCar.model = currentCar.model;
     this.currentCar.description = currentCar.description;

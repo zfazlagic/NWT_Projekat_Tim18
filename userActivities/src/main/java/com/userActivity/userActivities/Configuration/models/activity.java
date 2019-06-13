@@ -33,12 +33,11 @@ public class activity {
     private Long id;
 
     @Column(name = "userID", nullable = false)
-     @NotNull(message = "UserID can't be null.")
+    @NotNull(message = "UserID can't be null.")
     private Integer userId;
 
     @Column(name = "carID", nullable = false)
     @NotNull(message = "Car name cannot be null")
-
     private Integer carId;
 
     public Integer getIsRental() {
@@ -58,16 +57,17 @@ public class activity {
     }
 
     @Column(name = "isRental")
-    @Min(value = 0 , message = "isRental can only be 0 or 1.")
+    @Min(value = 0, message = "isRental can only be 0 or 1.")
     @Max(value = 1, message = "isRental can only be 0 or 1.")
     private Integer isRental;
 
-   @Column(name = "isReservation")
-   @Min(value = 0 , message = "isReservation can only be 0 or 1.")
-   @Max(value = 1, message = "isReservation can only be 0 or 1.")
+    @Column(name = "isReservation")
+    @Min(value = 0, message = "isReservation can only be 0 or 1.")
+    @Max(value = 1, message = "isReservation can only be 0 or 1.")
     private Integer isReservation;
 
-    public activity() {}
+    public activity() {
+    }
 
     public activity(Integer userId, Integer carId, Integer isRental, Integer isReservation) {
         this.userId = userId;

@@ -2,6 +2,6 @@ export class ActivityDetails {
   id: number;
   beginDate: Date;
   endDate: Date;
-  location?: Location;
+  location?: string;
   activityId: number;
 }
